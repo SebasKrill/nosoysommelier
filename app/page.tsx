@@ -518,7 +518,7 @@ export default function Home() {
                   onClick={(e) => e.stopPropagation()}
                   className="mt-3 block text-center text-sm font-medium text-orange-500 hover:text-[#722F37]"
                 >
-                  Compra este vino en rutadebarricas.com
+                  Si querés comprar vinos, no te olvides de nuestros amigos de rutadebarricas.com
                 </a>
               </article>
             ))}
@@ -583,6 +583,16 @@ export default function Home() {
           </form>
         </section>
 
+        <footer className="mt-16 pt-8 border-t border-orange-200 max-w-2xl mx-auto text-center space-y-3">
+          <p className="text-sm font-semibold text-[#722F37] uppercase tracking-wide">
+            Beber con moderación. Prohibida su venta a menores de 18 años.
+          </p>
+          <p className="text-xs text-gray-500 leading-relaxed">
+            Privacidad: el mail que dejás en la membresía se usa solo para enviarte las historias de No soy Sommelier, a través de Buttondown. No lo compartimos con nadie y podés darte de baja cuando quieras desde cualquier mail que recibas.
+          </p>
+          <p className="text-xs text-gray-400">© 2026 No soy Sommelier</p>
+        </footer>
+
         {selectedPost && (
           <div
             className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
@@ -627,7 +637,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="mt-6 inline-block text-center text-sm font-medium text-orange-500 hover:text-[#722F37]"
               >
-                Compra este vino en rutadebarricas.com
+                Si querés comprar vinos, no te olvides de nuestros amigos de rutadebarricas.com
               </a>
             </div>
           </div>
