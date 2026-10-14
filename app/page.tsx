@@ -438,15 +438,6 @@ const posts = [
       "Lo que une a Colonia Caroya con la Costa de Berisso, más allá de los kilómetros y los paisajes tan distintos, es la manera en que la Isabella funcionó como refugio de identidad para comunidades de inmigrantes que necesitaban seguir haciendo, en tierra ajena, lo que sabían hacer en la suya: vino casero, para la mesa familiar y para compartir con los vecinos. Hoy, mientras el mundo del vino argentino mira hacia Malbec y varietales de alta gama, la Isabella sigue ahí, resistiendo con el mismo tesón con el que resistió a la filoxera hace más de un siglo.",
     ],
   },
-  { title: "Regalar vino sin quedar mal", excerpt: "Qué preguntar antes de elegir, para no terminar regalando algo que nadie va a tomar.", date: "9 de septiembre", image: "/images/mujer-tinto-1.png" },
-  { title: "¿Corriedale y Malbec tienen algo en común?", excerpt: "Spoiler: sí, y tiene que ver con el suelo de Entre Ríos.", date: "8 de septiembre", image: "/images/uvas-3.png" },
-  { title: "¿Hay que decantar todos los vinos tintos?", excerpt: "La respuesta corta es no. La larga tiene que ver con la edad de la botella.", date: "7 de septiembre", image: "/images/servir-2.png" },
-  { title: "Con qué comer un blanco que no sea pescado", excerpt: "Combinaciones que rompen el estereotipo, para la próxima que abras uno.", date: "6 de septiembre", image: "/images/mujer-blanco-2.png" },
-  { title: "Qué es el terroir, explicado sin tecnicismos", excerpt: "Suelo, clima y una mano que trabaja — la fórmula de siempre, contada distinto.", date: "5 de septiembre", image: "/images/uvas-4.png" },
-  { title: "Vino para cada ocasión: la guía que me hubiese gustado tener", excerpt: "De la juntada improvisada al cumpleaños importante, sin gastar de más.", date: "4 de septiembre", image: "/images/mujer-tinto-3.png" },
-  { title: "La temperatura correcta (y la trampa del consejo más repetido)", excerpt: "Ese consejo de 'tinto a temperatura ambiente' tiene truco — te cuento cuál.", date: "3 de septiembre", image: "/images/servir-3.png" },
-  { title: "Tomar vino solo, sin ocasión especial", excerpt: "Un martes cualquiera también es un buen momento para abrir una botella.", date: "2 de septiembre", image: "/images/mujer-blanco-3.png" },
-  { title: "Lo que queda después de la cosecha", excerpt: "El silencio de marzo en el viñedo, cuando ya se llevaron todo.", date: "1 de septiembre", image: "/images/uvas-5.png" },
 ];
 
 export default function Home() {
