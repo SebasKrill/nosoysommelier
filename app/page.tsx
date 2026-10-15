@@ -1,455 +1,14 @@
-"use client";
-
-import { useState } from "react";
-
-const posts = [
-  {
-    title: "Garibaldi: burbujas",
-    excerpt: "Última etapa del viaje por el sur de Brasil. Un tren a vapor, la capital del espumante y la historia del primer champanha brasileño, de 1913.",
-    date: "21 de septiembre",
-    image: "/images/copas-acuarela.png",
-    body: [
-      "La Maria Fumaça salió de la estación de Bento con un silbido que me hizo saltar en el asiento. Sebas se rió; yo le pegué en el brazo.",
-      "Es un tren viejo, de madera, con ventanillas que se abren sobre los viñedos. Humo blanco, olor a carbón, el traqueteo de otro siglo. Al rato subieron músicos con acordeón y empezaron a tocar canciones italianas que todo el vagón sabía de memoria, menos nosotros. Algunos se pararon a bailar en el pasillo.",
-      "—Vamos —dijo Sebas, y me tendió la mano.",
-      "—No sé bailar esto.",
-      "—Nadie sabe. Por eso es divertido.",
-      "Bailamos mal, muy mal. El tren se sacudía, yo trastabillaba y él me sostenía de la cintura para que no me cayera. Una vez. Dos. A la tercera ya no estoy segura de que me estuviera cayendo.",
-      "Cuando terminó la canción volvimos al asiento sin aire. No me soltó la mano enseguida. Yo tampoco hice nada para que la soltara.",
-      "## La capital del espumante",
-      "Garibaldi es un pueblo prolijo, de casas antiguas y una estación de postal, con botellas en las vidrieras, en los carteles y hasta en los faroles.",
-      "—Bienvenida a la capital del espumante.",
-      "—¿Por qué acá?",
-      "—Porque acá empezó todo. En 1913, un inmigrante, Manoel Peterlongo, elaboró el primer espumante de Brasil con el método tradicional, el de Champagne: segunda fermentación en la botella. Ganó medalla de oro en la primera exposición de uvas del pueblo. Le salió tan bien que, décadas después, la Justicia brasileña dejó a la bodega seguir escribiendo \"champanha\" en la etiqueta. Son los únicos en el país.",
-      "—¿Y los franceses no se enojaron?",
-      "—Los franceses siempre se enojan.",
-      "La ciudad, me contó, fue la primera colonia italiana de la Serra, fundada en 1875 con el nombre de Conde d'Eu. Después la rebautizaron en honor a Giuseppe Garibaldi, el italiano que peleó en la Revolución Farroupilha.",
-      "—¿Estuvo acá?",
-      "—Nunca.",
-      "—Qué romántico.",
-      "—Los italianos son así. Se enamoran de alguien que nunca pisó el lugar.",
-      "## Un cuarto de vuelta por día",
-      "La bodega Peterlongo parece un pequeño castillo francés plantado en la sierra. Abajo hay túneles frescos y botellas cabeza abajo en pupitres de madera. Un guía nos explicó que las giran de a poco, todos los días, para que el sedimento baje al cuello.",
-      "—Un cuarto de vuelta por día —dijo—. Con paciencia.",
-      "Sebas me miró. No dijo nada. No hacía falta.",
-      "En la degustación probamos tres: un brut seco, de manzana verde y pan tostado; un rosado más frutal; y un moscatel dulce, perfumado, de burbuja finísima.",
-      "—¿Cuál te gusta?",
-      "—El moscatel.",
-      "—Sabía. Es el más alegre y el menos serio.",
-      "—¿Me estás diciendo poco seria?",
-      "—Te estoy diciendo alegre.",
-      "## El mirador",
-      "Al atardecer subimos a un mirador. Abajo, el pueblo; más allá, los cerros con viñas, todo dorado. Sebas había comprado un brut en la bodega, y con la botella le habían dado dos copas de plástico. La abrió con cuidado, sin que saltara el corcho: apenas un suspiro.",
-      "—Así se abre un espumante. Sin ruido. Como un secreto.",
-      "Las burbujas subían en fila, sin apuro.",
-      "—¿Por qué brindamos?",
-      "Miró los cerros, la botella, a mí.",
-      "—Por todo lo que todavía no.",
-      "Chocamos las copas. El plástico no hizo ruido.",
-      "Llegué a Brasil sin ser sommelier y me vuelvo igual: todavía no distinguiría con los ojos cerrados un espumante de método tradicional de uno charmat. Pero ahora sé que hay cosas que se hacen de a un cuarto de vuelta por día y que, cuando se abren bien, casi no hacen ruido.",
-      "Volvimos a Bento en taxi, ya de noche. Mañana manejamos hasta Porto Alegre, devolvemos el auto y tomamos el avión a Buenos Aires. Dos asientos juntos; eso, al menos, ya está decidido.",
-      "Todavía no sé qué llevo en la valija, además de vino.",
-    ],
-  },
-  {
-    title: "Bento Gonçalves: casas de piedra",
-    excerpt: "Cuarta etapa del viaje por el sur de Brasil. Los Caminhos de Pedra, una masa amasada de a dos y el Vale dos Vinhedos, donde el Merlot es protagonista.",
-    date: "20 de septiembre",
-    image: "/images/copas-tres.png",
-    body: [
-      "A Bento Gonçalves se entra por debajo de un barril. El pórtico de la ciudad tiene forma de pipa de vino, enorme, plantada sobre la ruta, y es a la vez monumento y declaración de principios.",
-      "—Pará, quiero una foto.",
-      "—Es un adorno para turistas —dijo Sebas, sin bajar la ventanilla.",
-      "—Es un barril. Y yo soy turista.",
-      "Frenó. Me sacó la foto. Después me pidió que le sacara una a él. Después le pidió a un señor que pasaba que nos sacara una a los dos. En esa salimos riéndonos de algo que ya no recuerdo, y es la única del viaje en la que estamos juntos.",
-      "## Los Caminhos de Pedra",
-      "La mañana la pasamos en los Caminhos de Pedra, un recorrido rural de unos doce kilómetros entre casas de los primeros inmigrantes: piedra abajo, madera arriba, como si sus constructores hubieran querido dejar claro qué parte era para siempre y qué parte para vivir. Algunas siguen siendo casas de familia; otras son cantinas, talleres, almacenes.",
-      "Entramos en una donde una señora amasaba pasta sobre una mesa larga, con harina hasta los codos.",
-      "—¿Querem experimentar?",
-      "Sebas se arremangó primero. Yo después, con las mangas de su campera subidas hasta el codo. La señora nos puso uno junto al otro, frente a la misma masa.",
-      "—Juntos —dijo—. A massa se faz a dois.",
-      "No sé si era una regla de cocina o un consejo. Amasamos. Las manos se encontraron varias veces en la harina. Ninguno pidió disculpas. Nos llevamos un paquete de tagliatelle torcidos, feísimos, hechos por nosotros. No pienso tirarlos.",
-      "## El Vale dos Vinhedos",
-      "A la tarde bajamos al Vale dos Vinhedos: colinas enteras de viñas, bodegas grandes y chicas, restaurantes entre las hileras.",
-      "—Es el valle más famoso de Brasil —dijo Sebas—. Fue la primera zona del país con Indicación Geográfica, en 2002, y diez años después la primera con Denominación de Origen.",
-      "—¿Cuál es la diferencia?",
-      "—La Denominación es más exigente: no solo dice de dónde viene la uva, sino cómo tiene que ser el vino. Los tintos de la DO llevan por lo menos sesenta por ciento de Merlot.",
-      "—Yo creía que el Merlot era el vino aburrido.",
-      "—En Hollywood, quizás. Acá es la estrella.",
-      "Nos sentamos en el deck de una bodega familiar. Nos sirvieron un tinto del valle, Merlot con algo de Cabernet: oscuro, ciruela, un fondo de café, taninos de terciopelo. Sebas, que manejaba, hizo durar una sola copa toda la tarde.",
-      "—No es aburrido —admití.",
-      "—Te lo dije.",
-      "—Odio cuando tenés razón.",
-      "—Por eso no lo digo seguido.",
-      "—Lo decís todo el tiempo.",
-      "—Lo pienso todo el tiempo. Lo digo a veces.",
-      "Abajo, unos ciclistas pasaban por la ciclovía entre las viñas. El sol se ponía naranja sobre los cerros, y el valle entero parecía una copa inclinada hacia la luz.",
-      "Sebas sacó del bolsillo dos papelitos y los dejó sobre la mesa.",
-      "—Pasajes. Mañana vamos a Garibaldi en la Maria Fumaça.",
-      "—¿La qué?",
-      "—Un tren a vapor. Veintitrés kilómetros con música italiana a bordo. Sale de Bento, pasa por Garibaldi y termina en Carlos Barbosa. Nosotros nos bajamos en Garibaldi.",
-      "—¿Y qué hay en Garibaldi?",
-      "—Burbujas.",
-      "No explicó más. Le gusta dejarme con la pregunta.",
-      "Cenamos galeto con polenta en un salón enorme lleno de familias ruidosas. Comimos poco y hablamos mucho, y en algún momento me di cuenta de que hacía horas que ninguno de los dos miraba el celular.",
-      "Acá los vinos tienen apellido italiano y paisaje brasileño, y el Merlot, que en otras partes hace de actor de reparto, es el protagonista. De todo lo que aprendí ese día, me quedo con lo más simple: la masa se hace de a dos.",
-      "En mi cuarto encontré harina seca en el puño de su campera.",
-      "No la limpié.",
-    ],
-  },
-  {
-    title: "Caxias do Sul: la ciudad que se come uvas",
-    excerpt: "Tercera etapa del viaje por el sur de Brasil. Una ciudad de camiones que todavía guarda la mesa de la nona, la Festa da Uva y una jarra de vino de la casa.",
-    date: "19 de septiembre",
-    image: "/images/mujer-tinto-2.png",
-    body: [
-      "Caxias do Sul no es el pueblo de postal que uno imagina. Es una ciudad grande y trabajadora, de fábricas, avenidas y camiones que bajan la sierra cargados. Pero debajo del ruido sigue latiendo la colonia.",
-      "—No es lo que me imaginaba —le dije a Sebas.",
-      "—Nada de este viaje es lo que te imaginabas.",
-      "—¿Y eso es bueno o malo?",
-      "—Decímelo al final.",
-      "La colonia nació en 1875 con familias del Véneto, de Lombardía, del Tirol. Llegaban endeudadas, con un lote de monte asignado que debían pagar en pocos años. Lo pagaron como se pagaba todo entonces: trabajando de sol a sol. Y con uva.",
-      "## La réplica de 1885",
-      "En el Parque de la Festa da Uva hay una réplica de cómo era Caxias en 1885: calles de tierra, casas de madera, una iglesia mínima, un almacén. Entramos en una de las casas. Techo bajo, una sola pieza, cocina a leña, una mesa, una cama angosta.",
-      "—Acá vivía una familia entera —dijo Sebas.",
-      "—No entran dos personas.",
-      "—Entran, si se quieren.",
-      "Lo dijo con el tono de quien recita un dato histórico. Salí primero, porque adentro hacía calor. Afuera hacía doce grados. Solo por eso.",
-      "Afuera me explicó la fiesta. La Festa Nacional da Uva se celebra desde 1931, cada dos años: regalan toneladas de uva, hay desfiles de carros alegóricos, polenta para miles y una reina.",
-      "—¿Una reina?",
-      "—En cada fiesta eligen una. Chicas de familias de la colonia.",
-      "—¿Y vos qué hacías mirando reinas?",
-      "—Viajaba. Hace mucho.",
-      "—¿Cuánto es mucho?",
-      "—Antes de conocerte.",
-      "Me di vuelta hacia una vitrina. No había nada interesante en la vitrina.",
-      "## La jarra y la copa",
-      "Almorzamos en una cantina de ruta, de manteles a cuadros y fotos de abuelos severos en las paredes. Sopa de capeletti, polenta frita, pollo con radicci. Sin que la pidiéramos llegó una jarra de vino de la casa: tinto liviano, con olor a uva recién cortada y un dejo dulce.",
-      "—Se parece al de Misiones —dije.",
-      "—Muy bien. —Sebas levantó las cejas—. Es uva americana, Isabel seguramente. Durante décadas fue la uva de la colonia: resistente, fácil, aguanta la humedad.",
-      "—¿Y es buen vino?",
-      "—Es vino de mesa. De la mesa de la nona. No se le pide más.",
-      "—A mí me gusta.",
-      "—Te gustan las cosas simples.",
-      "—Me gustan las cosas sinceras. No es lo mismo.",
-      "Se quedó mirándome con el vaso en la mano. Iba a pedir otra jarra, se acordó de que manejaba y pidió agua.",
-      "La dueña se acercó a conversar. Quiso saber de dónde éramos, cuánto llevábamos de viaje y si estábamos casados.",
-      "—No —dije yo.",
-      "—Todavía no —dijo él, casi al mismo tiempo.",
-      "La señora se rió, dijo algo en talian y se fue a la cocina.",
-      "—¿Qué dijo?",
-      "—Que el vino ayuda.",
-      "—¿A qué?",
-      "—No lo aclaró.",
-      "A la tarde visitamos una bodega moderna en las afueras, de las que mandan muestras a los concursos. Yo probé un Merlot criado en barrica; Sebas apenas mojó los labios. Era otro mundo: oscuro, serio, con chocolate y especias.",
-      "—En Caxias conviven las dos cosas —dijo—. El vino de la colonia y el vino de concurso. La jarra y la copa.",
-      "—¿Y cuál preferís?",
-      "—Depende con quién.",
-      "Ese Merlot tendrá sus medallas; la jarra de la cantina, en cambio, me devolvió a mi casa. Una ciudad de camiones todavía guarda, en algún rincón, una mesa de nona con vino dulce.",
-      "A la noche dejamos el auto en el hotel y salimos a caminar por el centro. Él, con las manos en los bolsillos; yo, con su campera puesta. Nos despedimos en el pasillo. Esperé a que cerrara su puerta.",
-      "—Todavía no —dije en voz baja.",
-      "No sé si me escuchó.",
-    ],
-  },
-  {
-    title: "Serra Gaúcha: la niebla",
-    excerpt: "Segunda etapa del viaje por el sur de Brasil. Seiscientos kilómetros, una sierra envuelta en niebla y los vinos tercos que dejaron los inmigrantes italianos.",
-    date: "18 de septiembre",
-    image: "/images/uvas-2.png",
-    body: [
-      "El auto lo alquilamos en Livramento, con devolución en Porto Alegre, y nos esperaban casi seiscientos kilómetros hacia el noreste. Durante horas la ruta fue recta y amarilla; después empezó a torcerse, a subir, y cuando cayó la noche entramos en la sierra. Curvas sobre curvas, y de golpe la niebla.",
-      "Sebas manejaba inclinado sobre el volante, como si así pudiera ver más. Yo llevaba la ventanilla un poco baja porque me mareaba.",
-      "—Cerrala, que hace frío.",
-      "—Me mareo.",
-      "Paró en la banquina, se sacó la campera y me la tiró encima sin decir palabra. Olía a él. No me la saqué en lo que quedaba de viaje.",
-      "## Un poco de Italia",
-      "A la mañana la niebla seguía allí, colgada de los cerros como ropa tendida. Abajo, viñedos en pendientes que darían vértigo a una cabra; arriba, casas de piedra con techos rojos. Parecía otro país. Parecía Italia.",
-      "—Es que es un poco Italia —dijo Sebas.",
-      "A fines del siglo XIX llegaron a estas sierras miles de campesinos del norte de Italia. El Imperio les dio tierras que nadie quería: empinadas, húmedas, cubiertas de monte. Hicieron lo único que sabían hacer.",
-      "—Plantar uva —dije.",
-      "—Plantar uva, hacer vino y rezar para que no lloviera en la vendimia. Acá llueve mucho. La uva madura con la humedad encima. Es la gran pelea de la Serra.",
-      "—¿Y por qué se quedaron?",
-      "—Porque uno no siempre elige dónde quedarse. Elige qué hacer con lo que le toca.",
-      "Pensé en eso más de lo que hubiera querido.",
-      "## Un Merlot en un banco",
-      "La posada estaba entre viñedos y ese día no tocamos el auto. En el almacén de la esquina compramos queso, pan, salame y una botella de Merlot. La señora del mostrador nos prestó un sacacorchos y dos vasos, y nos habló en una lengua extraña, un portugués cruzado de italiano antiguo.",
-      "—Es talian —me susurró Sebas al oído—. El dialecto de los abuelos. Todavía se habla.",
-      "No hacía falta que me lo dijera tan cerca. Tampoco me aparté.",
-      "Almorzamos en un banco frente a las hileras. El Merlot era suave, de fruta roja y algo de hierba, nada pesado.",
-      "—No se parece al Tannat de la Campanha —dije.",
-      "—Otro clima. Allá abajo hay sol y viento; acá, altura y niebla. Los vinos de la Serra son más frescos, más delicados.",
-      "—Más tímidos.",
-      "—Al principio. —Me sirvió un poco más—. Dales tiempo.",
-      "Me contó que la Serra tiene varias Indicaciones Geográficas: Vale dos Vinhedos, Altos Montes, Pinto Bandeira, Monte Belo, Farroupilha. Cada una con su carácter, como los hijos de una familia numerosa.",
-      "—¿Las vamos a ver todas?",
-      "—Las que nos den las piernas.",
-      "—Las mías aguantan.",
-      "—Ya veremos.",
-      "A la tarde caminamos entre las vides. El suelo era barro. Resbalé una vez y me sostuvo del codo; después, en cada bajada, me ofrecía la mano antes de que la necesitara. Yo la tomaba igual.",
-      "## Ciento cincuenta años",
-      "En una bodega familiar nos atendió un viejo de manos enormes. Nos sirvió un Cabernet Franc del barril en vasos de vidrio grueso y nos contó, en ese idioma de dos orillas, que su bisabuelo había plantado la primera vid de la ladera con estacas traídas en el barco.",
-      "—Cento e cinquenta anos —dijo, y golpeó la mesa con la palma.",
-      "Brindamos los tres sin saber del todo qué celebrábamos. Quizás eso: que alguien hubiera llegado a un lugar imposible y no se hubiera ido.",
-      "Un Merlot de montaña no sabe como uno de llanura, y empiezo a sospechar por qué: el de acá tiene algo de terquedad. Y la terquedad, a veces, es otra forma de la ternura.",
-      "Volvimos a la posada con la niebla bajando otra vez. En el pasillo, frente a su puerta, le devolví la campera.",
-      "—Quedatela. Mañana va a hacer frío.",
-      "En mi cuarto la colgué en la silla. No en el placard. En la silla, donde pudiera verla.",
-    ],
-  },
-  {
-    title: "Campanha Gaúcha: una calle, dos países",
-    excerpt: "Primera etapa del viaje por el sur de Brasil. Una frontera que es un cantero con pasto, un tren entre viñedos y un Tannat que no habla hasta la segunda vuelta.",
-    date: "17 de septiembre",
-    image: "/images/uvas-1.png",
-    body: [
-      "En Rivera la frontera no es un río ni una montaña: es un cantero con pasto en medio de una avenida. De un lado se habla castellano y del otro portugués, y los perros cruzan sin papeles. Llegamos de noche, después de seis horas de micro desde Montevideo, y caminamos hasta un hotel del lado brasileño arrastrando las valijas por encima de una línea que nadie ve.",
-      "—Ya estás en Brasil —dijo Sebas cuando pisé el cordón de enfrente.",
-      "No se le notó, pero me pareció que había estado esperando para decirlo.",
-      "Conviene decir dos cosas desde el principio. La primera: no soy sommelier. Viajo con la nariz de una aficionada y la libreta de una cronista; lo demás lo aprendo en el camino. La segunda: Sebas no es mi pareja. Lo conocí hace un año en una cata en Buenos Aires: había recorrido medio mundo con una mochila y una libreta llena de etiquetas, y yo tenía un blog y muchas preguntas. El viaje fue idea mía. Que viniera él, también. En la recepción pedimos dos habitaciones, y la empleada nos miró como se mira una cuenta que no cierra.",
-      "## El Trem do Pampa",
-      "A la mañana siguiente tomamos un taxi hasta Palomas, en las afueras de Santana do Livramento. Lomas suaves, alambrados, vacas quietas, un cielo que no terminaba nunca. Hace dos siglos el naturalista francés Auguste de Saint-Hilaire recorrió estos campos gaúchos a caballo, anotando plantas y costumbres. No creo que haya anotado viñas: no las había.",
-      "—Esto no tiene cara de zona de vinos —dije.",
-      "—Por eso nadie la conoce. Todos piensan en la Serra. Pero el vino fino del sur de Brasil empezó a tomarse en serio acá abajo.",
-      "Me contó que en 1973 una empresa norteamericana, Almadén, plantó la primera bodega de Livramento. Buscaban sol, viento y suelo pobre. Lo encontraron.",
-      "De Palomas sale el Trem do Pampa, un tren viejo que atraviesa los viñedos de Almadén, se detiene en la bodega y termina en la estación de Livramento. Viajamos frente a frente, con la ventanilla abierta y olor a pasto. En cada curva se nos rozaban las rodillas. Ninguno de los dos se acomodó.",
-      "—¿Qué se toma acá? —pregunté.",
-      "—Tannat, Cabernet, algo de Merlot. Lo mismo que en Uruguay, pero con otro pasaporte.",
-      "Desde 2020, me explicó, la región tiene Indicación de Procedencia: la uva tiene que nacer, crecer y volverse vino dentro de la Campanha.",
-      "—Como un documento de identidad.",
-      "—Uno que costó ganarse.",
-      "## Un Tannat que aprieta",
-      "En la parada de la bodega nos sirvieron un Tannat oscuro, casi negro. Me apretó la boca entera.",
-      "—Es duro —dije.",
-      "—Es joven. Tiene que aflojar.",
-      "—¿Y cuánto tarda?",
-      "—Depende de quién lo acompañe.",
-      "Lo dijo mirando la copa, no a mí.",
-      "Pedimos una picada de queso, salame y pan casero. Con la grasa, el Tannat se volvió más amable, como esos hombres de campo que no hablan hasta la segunda vuelta. A la tarde se levantó el viento, ese viento de pampa que no pide permiso. Sebas dijo que gracias a él las uvas de acá son sanas: las seca, no deja que se enfermen. Todo, con Sebas, tiene una explicación. Casi todo.",
-      "## Ida y vuelta",
-      "El tren nos devolvió a Livramento con el sol bajo. Antes de cenar cruzamos el cantero hacia Rivera para comprar algo en un free shop. Fuimos y volvimos dos veces. La segunda, sin comprar nada.",
-      "—¿Por qué cruzamos tanto? —le pregunté.",
-      "—Porque se puede.",
-      "Con los ojos cerrados no distinguiría un Tannat de la Campanha de uno de Canelones. Pero esta tierra se parece a la mía, y su vino es como su gente: callado al principio, y después no.",
-      "Mañana subimos a la Serra. Sebas ya se fue a su cuarto. Yo me quedo un rato en el balcón, mirando esa avenida donde un país termina sin ceremonia y empieza el otro.",
-      "Desde acá parece tan fácil cruzar.",
-    ],
-  },
-  {
-    title: "El torrontés de Cachi Adentro: un vino que huele a altura extrema",
-    excerpt: "La historia de un ingeniero suizo que se fue a las montañas de Salta a desenchufarse del mundo y terminó haciendo, a 2.700 metros, uno de los torrontés más singulares del país.",
-    date: "16 de septiembre",
-    image: "/images/torrontes-cachi.jpg",
-    body: [
-      "Hay vinos que se beben y hay vinos que se viven. El torrontés salteño pertenece, sin dudas, a la segunda categoría. No es un vino que se entiende del todo sentado en una mesa de ciudad. Para comprenderlo de verdad hace falta imaginar —o mejor, hacer— el viaje: subir por caminos de tierra entre paredes de roca rojiza, ver cómo el cielo se vuelve más azul y más vasto a medida que el altímetro sube, y llegar a un valle donde el tiempo parece haberse detenido en algún punto indefinido entre los siglos. Recién ahí, con una copa en la mano y el silencio de la montaña encima, el torrontés cobra todo su sentido.",
-      "## Una cepa con historia y con tierra propia",
-      "El torrontés es la única variedad vitivinícola verdaderamente autóctona de la Argentina. Su origen es el resultado de un cruce natural —ocurrido probablemente en los patios jesuíticos del siglo XVIII— entre la moscatel de Alejandría y la uva criolla chica. De ese accidente genético nació una cepa de personalidad arrolladora: aromática, floral, con una nariz que golpea antes de que el vino toque los labios.",
-      "Aunque existen distintas variantes del torrontés a lo largo del país —riojano, mendocino, sanluiseño— es el torrontés salteño el que se ganó el reconocimiento internacional. Y dentro de Salta, su territorio de expresión más poderosa son los Valles Calchaquíes: ese corredor de tierra seca y luz feroz que corre entre Cafayate, al sur, y los pueblos más altos del norte salteño, donde la vid trepa hacia la Puna y los viñedos rozan los límites de lo posible.",
-      "La vitivinicultura llegó a esta región de la mano de los jesuitas en el siglo XVII, y desde entonces la cepa fue adaptándose, mutando, aprendiendo a sobrevivir en un ambiente que no tiene nada de amable: suelos pobres y pedregosos, lluvias escasas, amplitud térmica brutal —días que queman y noches que congelan—, y una radiación ultravioleta que en las cotas más altas resulta casi agresiva. Paradójicamente, son exactamente esas condiciones extremas las que hacen al torrontés salteño tan especial.",
-      "## Lo que la altura le hace al vino",
-      "Para entender el torrontés de altura hay que entender qué le pasa a una vid cuando crece a más de dos mil metros sobre el nivel del mar. A esa altitud, el sol calienta de día con una intensidad descomunal, pero en cuanto cae la tarde la temperatura desciende en picada. Esa diferencia térmica —que puede superar los veinte grados entre el mediodía y la madrugada— es la clave del asunto: hace que la uva madure despacio, acumulando azúcares sin perder acidez, concentrando aromas con una paciencia que los climas cálidos no permiten.",
-      "El resultado en la copa es un vino que parece contradictorio: intensamente perfumado —flores blancas, jazmín, durazno, fruta tropical— pero al mismo tiempo fresco, vivo, con una acidez que lo mantiene elegante y lejos de la pesadez. La radiación ultravioleta, además, obliga a la uva a desarrollar una piel más gruesa como mecanismo de defensa, lo que concentra aún más sus compuestos aromáticos.",
-      "A esto hay que sumar los suelos: arenosos, francos, llenos de piedras, pobres en nutrientes. Una vid que tiene que esforzarse para encontrar sustento produce menos cantidad de fruto, pero de una calidad y una concentración que viñedos más generosos difícilmente alcanzan.",
-      "## Cachi Adentro: donde el vino llega al límite",
-      "Si Cafayate es la capital reconocida del torrontés salteño, Cachi es su frontera más extrema. Y dentro de Cachi, hay un lugar todavía más adentro —literalmente— que en los últimos años se convirtió en sinónimo de vinos de altura excepcionales: Cachi Adentro.",
-      "A seis kilómetros del pueblo de Cachi, metido entre cerros que custodian el valle con la seriedad de centinelas milenarios, este pequeño paraje vive bajo la sombra permanente del Nevado de Cachi, un coloso de 6.380 metros que domina cada paisaje y de cuyo deshielo nace el agua que riega las viñas. Es un lugar que intimida y enamora al mismo tiempo: pacífico, hermoso y absolutamente fuera del mundo.",
-      "A casi 2.700 metros sobre el nivel del mar, los viñedos de Cachi Adentro se acercan al límite teórico de lo que una vid puede producir con calidad enológica. Más arriba, el frío y la falta de madurez se vuelven enemigos. Pero justo en ese umbral, algo extraordinario sucede.",
-      "## Vinos ADENTRO: la historia del suizo que se quedó",
-      "La historia más conocida de Cachi Adentro es también una de las más improbables. A principios de los años 2000, un ingeniero suizo llegó a Salta después de un largo viaje por África y Brasil. No buscaba hacer vinos. Buscaba un retiro, un lugar donde desenchufarse del mundo occidental que lo agobiaba. Compró una finca en los Valles Calchaquíes y se puso a trabajar la tierra.",
-      "Fue un amigo de Cafayate quien lo empujó hacia la vid. Y fue la propia tierra quien se encargó del resto.",
-      "La Finca Río Las Arcas, que hoy comprende seis hectáreas de Malbec, una de Torrontés y una de Merlot, se encuentra al pie del Nevado de Cachi, a 2.865 metros de altura. Fue un proyecto construido prácticamente desde la nada: sin electricidad, sin agua potable, sin caminos asfaltados. Con la ayuda de los pobladores locales —cuya colaboración el ingeniero valora tanto como el suelo mismo—, la finca fue tomando forma cosecha tras cosecha.",
-      "El torrontés de pie franco que crece en esa hectárea es regado con el agua del deshielo que baja del Nevado a través de un sistema de acequias antiguas, el mismo principio que usaban los pueblos originarios de la región. Los suelos arenosos francos, con abundancia de piedras y pobreza de nutrientes, y la conducción bajo prácticas orgánicas —sin herbicidas, con fertilización mínima— producen una uva de sanidad natural extraordinaria.",
-      "En copa, el Torrontés de Vinos ADENTRO muestra un color amarillo pálido con reflejos acerados, limpio y brillante. En nariz aparece la fruta fresca —tropical y cítrica— ensamblada con flores blancas. En boca es elegante, con una nota mineral que recuerda al suelo pedregoso donde creció. Es un vino honesto, como define Götz a toda su producción: sin artificios, sin maquillaje, con la identidad del lugar estampada en cada sorbo.",
-      "«Lo que jamás imaginé era el vino que iba a salir de allí», contó alguna vez. Esa sorpresa genuina dice mucho del lugar.",
-      "## Un terroir que se lee en la copa",
-      "Más allá de Vinos ADENTRO, el área de Cachi concentra varias apuestas vinícolas que comparten el mismo punto de partida: la certeza de que este terroir de altura extrema le da al torrontés una dimensión que no tiene en ningún otro lugar.",
-      "Bodega Puna, ubicada a 2.600 metros en Cachi, produce un torrontés que, con el rigor de las condiciones de la zona, ha llegado a competir en certámenes internacionales como el Decanter de Londres. La Bodega Nueve Cumbres, con su línea Segundas Nupcias, trabaja el torrontés sin paso por madera, fermentado en acero inoxidable a baja temperatura para preservar cada nota frutal. El resultado, describen, es un vino que «es puro paisaje»: floral, fresco, con la vitalidad del viento de montaña.",
-      "Lo que une a todos estos proyectos es una convicción común: la altura no es un dato de marketing, es un ingrediente. A 2.700 metros, la piel de la uva se engrosa para defenderse del sol, la acidez se preserva gracias al frío nocturno, y los aromas se concentran de una manera que resulta imposible replicar en cotas más bajas.",
-      "## Cómo beberlo, cómo vivirlo",
-      "Un torrontés de Cachi merece algunos cuidados en la mesa. Servido entre 8 y 10 grados, en copa de boca ancha que permita abrirse a sus aromas, es un vino que sorprende incluso a quienes creen conocer el torrontés de siempre. La frescura y la mineralidad de altura lo alejan del perfil más dulzón que a veces se le critica a la variedad en versiones de menor altitud.",
-      "Para la mesa, es un compañero perfecto de la cocina del noroeste: empanadas salteñas, locro, tamales, humita. También funciona a la perfección con pescados de río, ceviches y platos con especias y picante, donde su acidez limpia y su carácter aromático actúan de contrapeso.",
-      "Pero hay una forma de beberlo que supera a todas las demás: en el propio valle, con el Nevado de Cachi en el horizonte y el silencio de la Puna como música de fondo. En ese contexto, la copa tiene otro peso. Cada sorbo sabe a trabajo humano, a agua de deshielo, a tierra pobre que da lo mejor de sí. Sabe a un lugar que existe en el límite del mundo y que, contra todo pronóstico, produce algo de una belleza extraordinaria.",
-      "## Por qué vale la pena buscarlo",
-      "El torrontés de Salta en general, y el de Cachi Adentro en particular, es uno de esos vinos que los amantes de la botella deberían conocer antes de que la fama los encarezca demasiado o los vuelva inalcanzables. Las producciones son pequeñas —Vinos ADENTRO produce apenas 26.000 litros anuales—, los proyectos son artesanales, y la relación entre lo que ofrecen y lo que cuestan sigue siendo, por ahora, una de las mejores noticias del mundo del vino argentino.",
-      "Además, hay algo que ninguna otra región del país puede ofrecer exactamente igual: ese sabor a extremo, a frontera, a altura que duele en los pulmones pero que se traduce en vinos de una vitalidad y una personalidad que no tienen equivalente. El torrontés de Cachi Adentro no es solo un vino blanco aromático. Es el documento líquido de un lugar singular, de personas que apostaron por lo imposible, y de una cepa argentina que en el techo de los Valles Calchaquíes encontró, finalmente, su mejor versión.",
-    ],
-  },
-  {
-    title: "Palo a Pique: el vino que Entre Ríos estaba esperando sin saberlo",
-    excerpt: "La historia de una bodega familiar en Colón que resucitó una tradición vitivinícola perdida hace noventa años y encontró, en un blend co-fermentado de tres cepas, la identidad que le faltaba al litoral.",
-    date: "15 de septiembre",
-    image: "/images/palo-a-pique.jpg",
-    body: [
-      "Hay descubrimientos que llegan de golpe y hay otros que se van construyendo despacio, con la paciencia de quien planta una vid y espera años antes de probar lo que dio la tierra. La historia de Bodega Altos del Palmar es de las segundas. Y el vino que la pone en el mapa —un blend cofermentado de Ancellotta, Marselan y Petit Verdot llamado Palo a Pique— es una de esas botellas que, cuando la abrís por primera vez, te generan la incomodidad placentera de tener que revisar todo lo que creías saber sobre el vino argentino.",
-      "Porque Palo a Pique no viene de donde uno espera. No viene de los Andes. No viene de la Patagonia. Viene del este, del litoral, de una provincia que durante décadas no figuró en ningún mapa vitivinícola serio: Entre Ríos.",
-      "## Una historia que se cortó y que volvió",
-      "Para entender lo que está pasando en Altos del Palmar hay que dar un paso atrás en el tiempo. Pocos lo saben, pero Entre Ríos fue, hacia fines del siglo XIX y comienzos del XX, la tercera provincia productora de vinos de Argentina. Su posición geográfica privilegiada —con puertos sobre el río Uruguay que facilitaban el comercio— y su suelo particular habían hecho de la región un territorio con vocación vitivinícola real.",
-      "Esa tradición murió de un plumazo en 1934, cuando la política económica del gobierno de Agustín P. Justo regionalizó la producción agrícola del país y concentró la industria del vino en Cuyo. Los viñedos entrerrianos fueron abandonados, las bodegas desaparecieron, y la memoria de ese pasado vitivinícola quedó sepultada bajo décadas de silencio.",
-      "Casi noventa años después, un puñado de productores pequeños y apasionados está haciendo el trabajo de recuperar esa tradición perdida. Altos del Palmar es uno de ellos. Fundada en 2017 como un proyecto familiar sobre la ruta 14, justo enfrente del Parque Nacional El Palmar, la bodega nació de algo difícil de planificar pero fácil de reconocer cuando ocurre: el descubrimiento de que un lugar tiene algo propio que decir, y la decisión de escucharlo.",
-      "## El paisaje que hace al vino",
-      "Colón, en el departamento de Uruguay, es uno de esos pueblos entrerrianos que enamoran por su ritmo lento y su belleza sin alardes. Termas, playas de río, cascos históricos de inmigración europea. Pero lo que hace al entorno de Altos del Palmar verdaderamente singular no se ve en las guías de turismo: está en el suelo.",
-      "Los viñedos de la bodega se asientan sobre las terrazas antiguas del río Uruguay —esas mesetas de origen fluvial que el río fue construyendo a lo largo de miles de años de sedimentación y retiro—. La geología de estas terrazas pertenece a lo que los científicos llaman la Formación El Palmar, del Pleistoceno Tardío: suelos arenosos rojizos y pardos, de textura franca, permeables, con buen drenaje y una pobreza de nutrientes que, como bien saben los viticultores, es exactamente lo que una vid necesita para dar lo mejor de sí.",
-      "Una vid que tiene que esforzarse para alimentarse produce menos cantidad de fruta. Pero lo que produce es distinto: más concentrado, más expresivo, con una identidad que los suelos ricos y generosos no pueden otorgar.",
-      "A esto se suma un microclima que tampoco figura en los manuales de vitivinicultura argentina. La cercanía al río Uruguay actúa como regulador térmico: suaviza los extremos, aporta humedad justa, genera brisas que mantienen las plantas sanas sin necesidad de intervenciones agresivas. El resultado es un clima que se parece más al de ciertas regiones europeas atlánticas que al de las zonas vitivinícolas argentinas tradicionales: sin el sol aplastante de Mendoza, sin la altitud extrema de Salta, pero con una luminosidad lateral y suave que permite que las uvas maduren despacio y conserven su acidez natural.",
-      "Y conviviendo con los viñedos, como testigos silenciosos de todo esto, los palmares de Butia yatay: esa palma autóctona y relictual que sobrevive desde el Pleistoceno en los mismos suelos arenosos donde hoy crecen las cepas. Cuando uno visita la bodega y ve las palmeras mezcladas con las hileras de vid, algo hace clic. Hay en ese paisaje una coherencia, una lógica de territorio que pocas bodegas en el país pueden mostrar con tanta elocuencia.",
-      "## El vino imposible: tres cepas, una sola ventana",
-      "Palo a Pique no es un blend ensamblado en bodega. Es un blend co-fermentado: las tres uvas —Ancellotta, Marselan y Petit Verdot— entran juntas al fermentador, se procesan juntas, construyen juntas su estructura. Eso es lo que lo hace verdaderamente singular, y es también lo que hace que solo sea posible aquí.",
-      "El truco —si es que se puede llamar truco a lo que en realidad es un accidente afortunado de clima y terroir— está en que estas tres variedades tienen curvas de maduración distintas. En regiones de mucho sol y calor, una de ellas siempre llega demasiado temprano o demasiado tarde para la fiesta. En Entre Ríos, gracias a la suavidad térmica y la ausencia de ese sol implacable que acelera los procesos, existe una ventana de tiempo donde las tres maduraciones se cruzan.",
-      "Esa ventana es pequeña. Hay que estar ahí, hay que leerla bien. Pero cuando sucede, lo que sale de la cofermentación es un vino que ninguna de las tres variedades podría producir sola.",
-      "La Ancellotta es una cepa de origen italiano —nacida en la Emilia-Romagna, donde se ha usado durante siglos como variedad de apoyo en blends— que aporta lo que la naturaleza le dio con generosidad descomunal: color rojo-púrpura casi negro, estructura tánica firme, fruta oscura y densa. Sola puede ser abrumadora. En un ensamblaje, es el esqueleto.",
-      "El Marselan es más moderno: un cruce entre Cabernet Sauvignon y Grenache creado en Francia en los años sesenta que llegó tarde al mundo del vino de calidad pero se instaló con fuerza. Aporta frutosidad intensa, aromas frescos y una vivacidad que levanta cualquier blend. En Entre Ríos, lejos del calor que a veces lo vuelve demasiado exuberante, muestra su perfil más contenido y elegante.",
-      "El Petit Verdot es el tercer actor y el más complejo. Cepa que los enólogos llaman \"difícil\" porque exige condiciones muy específicas para madurar bien, pero que cuando lo logra entrega una nariz aromática de gran complejidad —flores violáceas, especias, frutos negros maduros— y una estructura que le da al vino potencial de guarda y profundidad en boca.",
-      "La suma de las tres, cofermentadas en el terroir de las terrazas del Uruguay, produce algo que en la copa resulta inesperado para quien llega con los prejuicios del vino argentino clásico: un tinto de color profundo y vibrante, con acidez fresca y viva, de cuerpo medio pero con estructura, con una nariz que mezcla frutos rojos y negros con notas florales y un fondo mineral que recuerda al suelo arenoso donde creció. Es un vino liviano en alcohol pero no liviano en carácter. Bebible, pero con algo que pensar.",
-      "## Un nombre que es una declaración",
-      "El nombre Palo a Pique no es casual. En la costa del río Uruguay, \"palo a pique\" es como los paisanos llaman a los postes o estacas que se clavan verticalmente para marcar el terreno, y apoderarse del lugar. Es un término fundamentalmente argentino enraizado en la cultura del trabajo a la intemperie, de la avanzada sobre lo ignoto, desde el corazón de los pioneros. Ponerle ese nombre al vino más representativo de la bodega es un gesto de pertenencia: este vino es de aquí, de este río, de esta gente, de este suelo.",
-      "## Por qué esto importa",
-      "El vino argentino vive un momento extraño: por un lado, una consolidación enorme de los terroirs ya conocidos —Mendoza, Salta, Patagonia—; por el otro, una exploración silenciosa de territorios que nadie había pensado como vitivinícolas. Entre Ríos es parte de esa segunda historia.",
-      "Lo que está haciendo Altos del Palmar —y lo que encarna Palo a Pique en particular— es demostrar que el mapa del vino argentino todavía puede ampliarse, y que a veces las mejores historias no están en los terroirs consagrados sino en los que la propia historia del país había dejado en el olvido.",
-    ],
-  },
-  {
-    title: "Marselan: la joven cepa francesa que ya tiene domicilio en Argentina",
-    excerpt: "Nació en un laboratorio francés en 1961, fue archivada treinta años por \"fracasada\" y hoy asoma desde los cerros de Salta hasta las costas de Entre Ríos. La historia de una cepa de diseño que encontró su lugar.",
-    date: "14 de septiembre",
-    image: "/images/marselan.jpg",
-    body: [
-      "Hay variedades de vid que llevan siglos en la naturaleza y otras que nacieron, literalmente, en un laboratorio con nombre y apellido de investigador. El Marselan pertenece a este segundo grupo: una cepa \"de diseño\" que tardó treinta años en encontrar su lugar en el mundo y que hoy, de manera silenciosa pero constante, empieza a asomar en los viñedos argentinos, desde los cerros de Salta hasta las costas del litoral entrerriano.",
-      "## Un cruce pensado en un escritorio, no en la naturaleza",
-      "A diferencia del Malbec o el Cabernet Sauvignon, que son el resultado de cruces espontáneos que la genética moderna terminó de descifrar siglos después, el Marselan nació con fecha, lugar y objetivo precisos. Corría 1961 cuando el ampelógrafo parisino Paul Truel, investigador del INRA (el Instituto Nacional de Investigación Agronómica de Francia), decidió cruzar dos variedades de personalidades bien distintas: el Cabernet Sauvignon, potente, tánico y estructurado, y la Garnacha (Grenache), generosa, frutal y resistente a los climas cálidos.",
-      "El objetivo del programa de mejoramiento genético en el que trabajaba Truel no era artístico sino práctico: crear una variedad de alto rendimiento, bayas grandes y mayor tolerancia a enfermedades y plagas, en un contexto donde Francia buscaba variedades más rústicas para sus zonas de vino de mesa. El experimento se realizó cerca de la localidad de Marseillan, en el Languedoc-Rosellón, justo donde esta región se encuentra con el Mediterráneo. De ahí el nombre: Marselan, en homenaje al pueblo que vio nacer la cruza.",
-      "## El \"fracaso\" que se convirtió en revelación",
-      "Aquí viene la primera anécdota interesante de esta cepa: nació para el fracaso. El objetivo original —bayas grandes para uva de mesa o alto rendimiento— no se cumplió. Los racimos resultaron compactos, pero las bayas eran pequeñas, casi diminutas, algo que en ese momento se consideraba un defecto porque reducía el volumen de cosecha. El estudio quedó archivado durante casi tres décadas, una verdadera \"cepa cajón\" durmiendo en los registros del INRA.",
-      "La ironía es que ese mismo \"defecto\" —bayas chicas con mucha piel en relación a la pulpa— es hoy exactamente lo que los enólogos buscan para lograr vinos con color profundo, buena concentración de taninos y compuestos polifenólicos. Lo que en 1961 se vio como una debilidad comercial, en la década de 1990 se transformó en una virtud enológica. El Marselan fue rescatado, revisado y finalmente inscripto en el registro oficial de variedades de Francia en 1990, aunque en un primer momento solo se autorizó para vinos de la categoría IGP. Recién en 2011 hizo su primera aparición permitida en denominaciones de origen (AOC), pudiendo sumarse en pequeños porcentajes a blends de zonas tan prestigiosas como Côtes-du-Rhône o Burdeos.",
-      "## Características de la cepa y del vino",
-      "En el viñedo, el Marselan es una planta de vigor moderado, porte semierguido y sarmientos relativamente largos. Sus racimos son de tamaño pequeño a mediano, cilindro-cónicos, con bayas pequeñas, redondeadas, de color negro violáceo y piel gruesa cubierta de pruina. Esa piel gruesa y los racimos poco compactos son justamente los que le otorgan buena tolerancia natural frente al oídio, los ácaros y la podredumbre gris, algo especialmente valioso en climas húmedos. Es una variedad, eso sí, sensible al estrés hídrico: prefiere suelos frescos y profundos, o riego complementario cuando el clima aprieta.",
-      "En la copa, el Marselan hereda lo mejor de sus dos \"padres\". De la Garnacha toma la generosidad frutal y la adaptación a climas cálidos y secos; del Cabernet Sauvignon, la estructura, el color y cierta acidez que le da columna vertebral. El resultado son vinos de color intenso, casi impenetrable, con aromas a frutos rojos y negros frescos —cereza, grosella, mora—, notas de cacao, especias, pimienta, regaliz y, en algunos casos, un sutil toque floral. En boca son vinos de cuerpo medio a alto, con taninos presentes pero suaves y redondeados, acidez moderada y un interesante potencial de guarda gracias a su riqueza polifenólica.",
-      "Un dato curioso para los amantes del maridaje: su cáscara dura y su comportamiento durante la fermentación hacen que los hollejos se mantengan más enteros que en otras variedades, lo que facilita el manejo de la extracción en bodega y explica por qué muchos enólogos la describen como una uva \"agradecida\" para trabajar.",
-      "## De Francia al mundo: la gran difusión silenciosa",
-      "Durante sus primeras décadas de vida oficial, el Marselan permaneció casi exclusivamente en el sur de Francia, en el Languedoc-Rosellón, donde los viticultores lo usaban para diversificar sus vinos de la tierra. Pero su capacidad de adaptación a climas cálidos, sumada al avance del cambio climático, le abrió las puertas del mundo.",
-      "Hoy se cultiva en España, en Uruguay (donde bodegas como Juanicó, Garzón o Antigua Bodega Stagnari ya la trabajan), en Brasil, en Estados Unidos y, de manera notable, en China. Allí el Marselan encontró un admirador inesperado: su resistencia a enfermedades fúngicas, ideal para el clima húmedo de provincias como Shandong, la convirtió en una de las variedades tintas de mayor proyección del gigante asiático.",
-      "## Marselan en Argentina: un experimento que crece de norte a sur",
-      "En nuestro país, el Marselan todavía es una variedad de nicho, casi una rareza para curiosos, pero su presencia se expande de forma llamativa por la diversidad geográfica en la que aparece. Y ahí está quizás lo más interesante de su historia argentina: no se concentra en una sola región, sino que asoma en enclaves muy distintos entre sí.",
-      "En Mendoza, algunas bodegas ya experimentan con el Marselan como alternativa varietal o como componente de blends, aprovechando la amplitud térmica y los suelos de zonas como el Valle de Uco. En Salta, con sus viñedos de altura entre los más elevados del planeta, la variedad encuentra un terroir de fuerte insolación y grandes diferencias térmicas entre el día y la noche, condiciones que suelen favorecer vinos de color profundo y aromas intensos.",
-      "Pero la historia más singular es la de Entre Ríos. La provincia litoraleña, que supo tener una tradición vitivinícola hace más de un siglo, encontró en el Marselan a una aliada inesperada para relanzar su identidad vitícola. El clima entrerriano, húmedo y con viñedos expuestos a enfermedades fúngicas, es un desafío para muchas variedades clásicas; sin embargo, la resistencia natural del Marselan a estos problemas la convirtió en una carta interesante dentro de un plan de fomento cultural y turístico. Bodegas boutique de la costa del río Uruguay ya suman al Marselan junto al cabernet franc y el Tannat en sus etiquetas.",
-      "## Una cepa para seguir de cerca",
-      "El Marselan es, en definitiva, el ejemplo perfecto de cómo la ciencia y la paciencia pueden reescribir el destino de una variedad. Nacida para un objetivo que nunca cumplió, rescatada del olvido treinta años después y hoy repartida entre el sur de Francia, los viñedos en expansión de China y los rincones más diversos de la geografía argentina, desde los cerros salteños hasta las costas entrerrianas. Si todavía no probaste un Marselan, esta es una buena excusa: es una cepa que promete color, estructura y, sobre todo, una historia que vale la pena contar en cada copa.",
-    ],
-  },
-  {
-    title: "Primitivo y Zinfandel: la historia de una misma uva con dos apellidos",
-    excerpt: "Durante un siglo, productores de Italia y California creyeron tener dos uvas distintas. La ciencia demostró que eran la misma. Un recorrido por el enredo genético que une Puglia, California y Croacia.",
-    date: "13 de septiembre",
-    image: "/images/primitivo-zinfandel.jpg",
-    body: [
-      "Pocas variedades de vid han protagonizado un enredo genético y geográfico tan fascinante como el que une al Primitivo italiano con el Zinfandel californiano. Durante más de un siglo, productores, enólogos y consumidores de ambos lados del Atlántico creyeron que tenían en sus manos dos uvas distintas, cada una con su propia identidad regional. La ciencia terminó por revelarles algo que sonaba casi a broma: eran, genéticamente, la misma variedad.",
-      "## El origen: un viaje que empieza en los Balcanes",
-      "Durante décadas, la pregunta sobre el origen del Primitivo y el Zinfandel generó teorías de todo tipo. Algunos sostenían que el Primitivo había llegado a Italia desde Croacia en el siglo XVIII, otros defendían un origen puramente autóctono en la península itálica, y en Estados Unidos se especulaba con que el Zinfandel había sido traído por inmigrantes húngaros o austríacos a mediados del siglo XIX.",
-      "La resolución definitiva llegó recién en el año 2001, cuando un equipo de investigadores liderado por la Dra. Carole Meredith, de la Universidad de California en Davis, utilizó análisis de ADN para determinar que el Primitivo, el Zinfandel y una uva croata casi extinta llamada Crljenak Kaštelanski eran, en efecto, la misma variedad genética. El hallazgo se completó cuando se identificó a otra variedad croata, la Tribidrag, como el nombre histórico más antiguo documentado para esta cepa, con registros que se remontan al siglo XV en la región de Dalmacia.",
-      "Este triple descubrimiento cerró uno de los grandes misterios de la ampelografía moderna: una misma uva balcánica había emigrado en distintas direcciones y momentos históricos, adaptándose a climas y culturas vitivinícolas completamente diferentes, hasta terminar convertida en tres \"identidades\" separadas que solo la genética pudo reunificar.",
-      "## Cómo el Tribidrag se convirtió en Primitivo",
-      "El salto de los Balcanes a Italia ocurrió, según la evidencia histórica más aceptada, en el siglo XVIII. La variedad llegó a la región de Puglia, en el sur de la bota italiana, específicamente a la zona de Gioia del Colle. Allí, un sacerdote y agrónomo llamado Francesco Filippo Indellicati observó que esta uva maduraba antes que cualquier otra variedad de la zona. De ese rasgo distintivo —la maduración temprana— derivó el nombre con el que la bautizó: \"Primitivo\", del latín primativus, es decir, \"el primero en madurar\".",
-      "Esa característica no es un dato menor: define buena parte del carácter del vino. Al madurar antes, el Primitivo puede acumular azúcares con rapidez incluso bajo el sol intenso del sur de Italia, lo que históricamente derivó en vinos de alta graduación alcohólica, cuerpo generoso y una concentración frutal notable. Durante buena parte del siglo XX, gran parte de la producción de Primitivo ni siquiera se embotellaba como vino varietal: se usaba como vino de corte, enviado hacia el norte de Italia y hacia Francia para dar cuerpo y grado alcohólico a vinos más débiles.",
-      "## El otro viaje: de los Balcanes a California",
-      "Mientras el Tribidrag se instalaba en Puglia, otro capítulo de la misma historia se escribía del otro lado del océano. La teoría más sólida indica que la uva llegó a Estados Unidos a través de viveros del noreste, probablemente desde Viena, en la década de 1820, bajo el nombre de \"Zinfandel\".",
-      "Pero fue en California, durante la fiebre del oro y los años posteriores, cuando el Zinfandel encontró su verdadero destino. A mediados del siglo XIX, viveristas como Frederick W. Macondray y luego Agoston Haraszthy ayudaron a difundir la variedad por el estado. Para las décadas de 1880 y 1890, el Zinfandel ya era la uva más plantada en California, valorada por su productividad, su resistencia y su capacidad de dar vinos robustos.",
-      "Sobrevivió incluso a la Ley Seca (1920-1933) de una manera curiosa: muchos viñedos de Zinfandel se mantuvieron en pie porque sus uvas, de piel gruesa, resistían bien el transporte en tren hacia el este del país, donde familias de inmigrantes las compraban para elaborar vino casero de forma legal, dentro del límite permitido por la ley para consumo doméstico.",
-      "## La anécdota del \"White Zinfandel\" que salvó viñedos centenarios",
-      "Uno de los episodios más curiosos de esta historia ocurrió en la década de 1970. Un enólogo llamado Bob Trinchero, de la bodega Sutter Home, intentó elaborar un Zinfandel tinto más concentrado y, para ello, sangró parte del mosto antes de la fermentación. Ese jugo rosado sobrante lo fermentó aparte, casi como experimento. En un lote posterior, una fermentación se detuvo antes de consumir todo el azúcar, dejando un vino rosado, ligeramente dulce y de baja graduación.",
-      "Ese \"error\" se convirtió en el White Zinfandel, un vino rosado semidulce que resultó un éxito comercial descomunal en Estados Unidos durante los años 80 y 90. La ironía es que el boom del White Zinfandel salvó de la extracción a miles de hectáreas de viñedos viejos de Zinfandel que, de otro modo, probablemente habrían sido arrancados y reemplazados por variedades más \"de moda\". Gracias a esa demanda masiva, hoy California conserva algunos de los viñedos de Zinfandel más antiguos del mundo, conocidos como \"Old Vine Zinfandel\".",
-      "## Características del vino en Puglia e Italia",
-      "El Primitivo di Puglia, y en particular el Primitivo di Manduria, se caracteriza por vinos de color rojo rubí muy intenso, casi violáceo en su juventud. En nariz aparecen notas de mora, ciruela negra, higo maduro y especias dulces, a menudo con matices de regaliz y un toque de vainilla o cacao cuando pasa por barrica. En boca son vinos de cuerpo pleno, taninos redondos y maduros, alcohol elevado (habitualmente entre 13,5% y 15,5%) y una acidez moderada que los hace sentir generosos y cálidos.",
-      "## Características del vino en California",
-      "El Zinfandel californiano, especialmente el proveniente de zonas como Lodi, Sonoma y algunos sectores de Napa, tiende a mostrar una expresión frutal aún más exuberante: mermelada de mora, frambuesa madura, pasas y especias como canela y pimienta negra, con frecuencia acompañadas de notas ahumadas o tostadas por el uso de roble americano. Los llamados \"Old Vine Zinfandel\", provenientes de viñedos centenarios de bajo rendimiento, suelen ofrecer mayor complejidad, concentración y equilibrio.",
-      "## Una sola uva, tres personalidades",
-      "Lo notable de esta historia es cómo una misma variedad genética puede expresarse de maneras tan distintas según el terroir, el clima y la tradición vitivinícola que la recibe. El Primitivo italiano tiende a mostrar una faceta más mediterránea, el Zinfandel californiano suele ser más frutal y exuberante, y el Tribidrag croata ofrece hoy casi una curiosidad arqueológica del vino. Más allá de las etiquetas y las fronteras, Primitivo y Zinfandel son, en el fondo, dos capítulos de la misma novela: la de una uva balcánica que, gracias a la migración humana, el comercio y hasta los accidentes de bodega, terminó escribiendo su historia en dos continentes distintos, sin perder jamás su identidad genética original.",
-    ],
-  },
-  {
-    title: "Tres mundos, una uva: la historia del Sauvignon Blanc en Nueva Zelanda, Chile y el Loira",
-    excerpt: "Mineral y contenido en el Loira, explosivo en Marlborough, a mitad de camino en Chile. Tres formas radicalmente distintas de interpretar la misma cepa blanca.",
-    date: "12 de septiembre",
-    image: "/images/sauvignon-blanc.jpg",
-    body: [
-      "Pocas cepas blancas dividen tanto las opiniones —y despiertan tanta fidelidad— como el Sauvignon Blanc. Basta con poner una copa de Sancerre junto a una de Marlborough para entender que, aunque compartan variedad, estamos ante dos vinos casi opuestos. Sumemos Chile a la ecuación y el panorama se vuelve todavía más interesante: tres países, tres climas, tres historias y tres formas muy distintas de entender la misma uva.",
-      "## El origen: una uva \"salvaje\" del oeste de Francia",
-      "El Sauvignon Blanc nació en el oeste de Francia, en algún punto entre el valle del Loira y Burdeos. Su nombre combina sauvage (salvaje) y blanc (blanco), en alusión al carácter silvestre de la planta. Durante siglos fue, ante todo, una uva francesa: protagonista de los blancos secos del Loira y compañera del Sémillon en los blancos —secos y dulces— de Burdeos, incluidos los legendarios Sauternes.",
-      "Desde ese punto de partida, el Sauvignon Blanc viajó por el mundo mucho antes de convertirse en el fenómeno global que conocemos hoy. Con la colonización europea, la vid llegó a América y al hemisferio sur: fue en el siglo XVI cuando en Canadá, Argentina, Chile y Estados Unidos se comenzó a cultivar la vid, práctica que luego se extendería a Sudáfrica y Australia. Nueva Zelanda, en cambio, es un capítulo mucho más reciente de esa historia.",
-      "## Loira: la cuna clásica, mineral y elegante",
-      "En las apelaciones de Sancerre y Pouilly-Fumé, sobre suelos de sílex y caliza, el Loira desarrolló el estilo que durante mucho tiempo definió lo que \"debía ser\" un Sauvignon Blanc: vinos tensos y minerales, con fruta contenida y acidez pronunciada, considerados el epítome de la elegancia y la expresión del terroir. Es un estilo que prioriza la sutileza por encima de la explosión frutal: notas cítricas, hierbas frescas, pedernal, y una acidez que estructura todo el vino sin dominarlo.",
-      "Aunque la mayoría de estos vinos se disfrutan jóvenes, los grandes ejemplares del Loira, o las versiones con crianza en roble, pueden ganar complejidad con hasta cinco o siete años de guarda, algo poco habitual en la variedad. Es, en cierto sentido, el Sauvignon Blanc \"de biblioteca\": el que invita a pensar antes de beber.",
-      "## Nueva Zelanda: la revolución que llegó en los años 80",
-      "La historia neozelandesa es la más joven de las tres, pero también la más disruptiva. La vid comercial en Marlborough, en el extremo noreste de la Isla Sur, es un fenómeno que data recién de los años 70. El punto de inflexión llegó con un vino puntual: el Sauvignon Blanc 1979 de Montana (hoy Brancott Estate), cuya intensidad inusual despertó el interés de operadores del sector. Entre quienes tomaron nota estaba David Hohnen, fundador de Cloudy Bay, la bodega que terminaría convirtiéndose en un ícono neozelandés a nivel mundial.",
-      "Fue en la década de los 80 cuando el Sauvignon Blanc de Marlborough causó sensación en el mercado internacional, ayudado por un combo climático muy particular: un clima fresco pero muy soleado, escasa pluviosidad y un suelo de drenaje libre y moderadamente fértil. El resultado es exactamente lo opuesto al estilo del Loira: una explosión de notas cítricas, fruta de la pasión, pomelo y un distintivo toque herbáceo o de pimiento verde. Hoy, el Sauvignon Blanc es la uva más plantada del país, concentrada básicamente en Marlborough.",
-      "Vale un detalle curioso de los primeros años: en los inicios de la industria neozelandesa no había bodegas en la Isla Sur, por lo que las uvas recién cosechadas debían viajar hasta Auckland, en la Isla Norte, para ser vinificadas. La infraestructura vino después que la fama.",
-      "## Chile: el \"nuevo mundo\" con un giro propio",
-      "La historia chilena tiene un capítulo que la distingue de las otras dos: durante décadas, buena parte de lo que se vendía como \"Sauvignon Blanc\" en el país en realidad correspondía a Sauvignon Vert (Sauvignonasse), una variedad distinta que se había confundido con la original tras su llegada desde Europa en el siglo XIX. Recién con estudios ampelográficos más recientes se fue corrigiendo esa identidad varietal, en paralelo a un salto de calidad enorme impulsado por la búsqueda de climas más frescos.",
-      "Ese giro llevó a los productores hacia zonas costeras influenciadas por la Corriente de Humboldt. El Valle de Casablanca y el Valle de Leyda producen hoy excelentes Sauvignon Blancs, de fruta clara y buena acidez, mientras que más al sur, la región de Valparaíso permite cosechar la uva hasta unas seis semanas más tarde que en el resto de Chile, lo que favorece perfiles más tensos y frescos. El estilo chileno suele ubicarse en un punto intermedio entre la contención del Loira y la exuberancia neozelandesa.",
-      "## Tres estilos, un mismo ADN",
-      "Puestos lado a lado, el contraste es la mejor forma de entender la variedad: el Loira (Sancerre, Pouilly-Fumé) es mineral, contenido, de acidez elegante, con notas de pedernal y cítricos discretos — el estilo \"clásico\" de referencia. Nueva Zelanda (Marlborough) es explosivo, tropical y herbáceo, con maracuyá, pomelo y pimiento verde en primer plano — el estilo que redefinió la variedad para el mercado masivo. Y Chile (Casablanca, Leyda) ofrece fruta clara, acidez fresca, un punto medio entre la sobriedad europea y la exuberancia neozelandesa, con creciente identidad propia.",
-      "Lo interesante es que ninguno de los tres estilos es \"más auténtico\" que otro: son respuestas distintas de la misma uva a suelos, climas y culturas vitivinícolas diferentes. El Loira aporta la tradición; Nueva Zelanda, la disrupción comercial que catapultó a la variedad al estrellato global; y Chile, una historia de reinvención que todavía está escribiendo sus mejores capítulos. La próxima vez que tengas la posibilidad, armá tu propia cata comparativa: una botella de cada origen, misma añada si es posible.",
-    ],
-  },
-  {
-    title: "Tannat en cuatro terruños: Bolivia, los Valles Calchaquíes, Uruguay y Entre Ríos",
-    excerpt: "Nació en los Pirineos, cruzó el Atlántico con inmigrantes vascos y hoy se interpreta de cuatro maneras distintas en Sudamérica. Un recorrido por la cepa que se volvió bandera en más de un país.",
-    date: "11 de septiembre",
-    image: "/images/tannat.jpg",
-    body: [
-      "Pocas cepas cuentan una historia tan enredada y tan sudamericana como el Tannat. Nacida en el suroeste de Francia, en las estribaciones de los Pirineos —cuna de los vinos de Madiran e Irouléguy—, esta variedad de piel gruesa y taninos poderosos cruzó el Atlántico en los baúles de inmigrantes vascos y franceses en el siglo XIX y encontró en el Río de la Plata un segundo hogar. Un siglo más tarde repitió la hazaña en la altura boliviana. Hoy, cuatro regiones la interpretan de maneras radicalmente distintas: Uruguay, que la convirtió en emblema nacional; Entre Ríos, su cuna sudamericana olvidada y hoy renacida; los Valles Calchaquíes de Salta, donde la altitud extrema la transforma; y Tarija, en Bolivia, la incorporación más reciente y una de las más elogiadas del mundo del vino actual.",
-      "## El origen común: una cepa \"difícil\" que cruzó el océano",
-      "El Tannat debe su nombre a su altísimo contenido de taninos, lo que durante mucho tiempo la hizo fama de variedad ruda y poco dócil. En Francia se la vinifica tradicionalmente en Madiran, donde da vinos tánicos, oscuros y de gran capacidad de guarda. Fue esa misma rusticidad la que, paradójicamente, terminó siendo su pasaporte al éxito en América del Sur: en manos de inmigrantes vascos que buscaban replicar el estilo de Burdeos con lo que tenían a mano, el Tannat resultó sorprendentemente bien adaptado a climas y suelos muy distintos a los suyos.",
-      "## Entre Ríos: la cuna sudamericana que la historia casi borra",
-      "Aunque hoy se asocia el Tannat casi automáticamente con Uruguay, la evidencia histórica apunta a que su primera gran expansión sudamericana ocurrió en la orilla argentina del río Uruguay, en Entre Ríos. Hacia 1860, el caudillo Justo José de Urquiza impulsó la llegada de colonos europeos a la región de Concordia y Colón, entre ellos inmigrantes vascos que trajeron sarmientos de distintas variedades francesas. Uno de ellos, Juan Jáuregui —apodado \"el Lorda\"—, plantó Tannat en Concordia hacia fines del siglo XIX. Según cuenta la tradición vitivinícola de la zona, fue el propio Jáuregui quien regaló sarmientos de esa cepa a su amigo Pascual Harriague, al otro lado del río, en Salto, dando origen a la gran epopeya uruguaya del Tannat.",
-      "Para 1890, Entre Ríos tenía más superficie de viñedos que Mendoza y San Juan. Pero la fiesta duró poco: la crisis del treinta y una ley nacional de 1935 que favoreció a las provincias cuyanas condenaron a la vitivinicultura entrerriana a una prohibición de facto que se extendió hasta 1993. Desde la liberalización legal y con más fuerza en los últimos años, bodegas entrerrianas están recuperando ese patrimonio, con vinos que empiezan a competir de igual a igual frente a los gigantes uruguayos y bolivianos.",
-      "El Tannat entrerriano se cultiva a muy baja altitud, prácticamente al nivel del río, en un clima subtropical húmedo con fuerte influencia fluvial. Esto produce vinos de perfil más rústico y untuoso, con mucho color y estructura tánica marcada, que las bodegas actuales trabajan activamente para \"domar\" mediante manejo de canopia, cosechas cuidadas y crianzas breves.",
-      "## Uruguay: la cepa que se volvió bandera nacional",
-      "La historia de Pascual Harriague es, sin dudas, la más célebre del Tannat americano. Nacido en 1819 en Hasparren, país vasco francés, emigró a Uruguay a los diecinueve años y se instaló en Salto. Allí, en su establecimiento de La Caballada, plantó las primeras cepas de Tannat en la década de 1870, con la primera cosecha exitosa hacia 1876. Durante décadas, la variedad ni siquiera se llamó Tannat: se la conocía simplemente como \"Harriague\". El propio gobierno uruguayo le otorgó una medalla de oro en 1888 por su contribución a la industria del país.",
-      "El golpe de suerte histórico llegó con la filoxera: mientras la plaga arrasaba los viñedos europeos a fines del siglo XIX, algunas plantaciones uruguayas de Tannat sobrevivieron, lo que terminó de consolidar a la variedad como la identidad vitivinícola del país. Hoy Uruguay celebra el 14 de abril el Día del Tannat, y la cepa concentra la mayor superficie de viñedos tintos del país, sobre todo en Canelones y Montevideo. El clima atlántico, húmedo y templado, suaviza el carácter del Tannat: los vinos uruguayos suelen mostrarse más elegantes y frutales, con notas de mora y ciruela, taninos presentes pero pulidos.",
-      "## Los Valles Calchaquíes: Tannat de altura extrema en Salta",
-      "En el noroeste argentino, las variedades francesas —incluido el Tannat— llegaron hacia 1886, cuando el coronel Wenceslao Plaza introdujo cepas galas desde Chile en su finca La Perseverancia, en Animaná. A diferencia de Uruguay y Entre Ríos, en Cafayate y el resto de los Valles Calchaquíes el Tannat nunca fue protagonista: ese rol lo ocupa el Torrontés, seguido por el Malbec. El Tannat funciona allí como varietal complementario.",
-      "Los viñedos de Cafayate se ubican entre 1.650 y 2.000 metros sobre el nivel del mar, con una amplitud térmica diaria de hasta 20 grados, cielos limpios y precipitaciones anuales por debajo de los 250 milímetros. Esta combinación genera hollejos más gruesos, mayor concentración de color y polifenoles, y una acidez natural muy marcada. El resultado son Tannats intensos, de color casi impenetrable, con aromas concentrados de fruta negra y especias.",
-      "## Bolivia: la incorporación más reciente y la de mayor altitud",
-      "La historia boliviana del Tannat es, por lejos, la más joven de las cuatro. Comenzó recién en noviembre de 1999, cuando el ingeniero Milton Castellanos, fundador de Bodegas Aranjuez, junto al enólogo Iván Bluske, plantó la primera cepa en el Valle Central de Tarija. El punto de inflexión llegó en 2013, cuando un vino boliviano obtuvo la primera medalla Gran Oro para el país en el concurso \"Tannat al Mundo\", celebrado en Uruguay, superando a etiquetas del propio país cuna de la variedad. Hoy Bolivia cuenta con más de sesenta etiquetas de Tannat.",
-      "Lo que distingue al Tannat boliviano es, sobre todo, la altitud: sus viñedos se cultivan entre 1.900 y 2.095 metros sobre el nivel del mar, entre los más elevados del mundo para esta variedad. Esa altura excepcional suaviza la rusticidad tánica característica de la cepa, dando vinos con taninos más maduros y sedosos de lo esperable, buena acidez y color muy profundo.",
-      "## Cuatro Tannats, cuatro personalidades",
-      "Puestos en una misma mesa, estos cuatro Tannats cuentan la historia de una cepa camaleónica. El de Entre Ríos es el más ligado al río y a la memoria recuperada, rústico y en plena reinvención. El de Uruguay es el más clásico y frutal. El de los Valles Calchaquíes es el más concentrado y solar. Y el de Bolivia es el más nuevo y, según muchos catadores, el que mejor logra domesticar los taninos originales de la variedad. Cuatro países, cuatro alturas, cuatro historias de inmigración y reinvención: el mismo linaje francés convertido, en cada rincón, en una expresión distinta de terruño.",
-    ],
-  },
-  {
-    title: "Uva Isabella: la cepa \"prohibida\" que se convirtió en tradición",
-    excerpt: "En Colonia Caroya la llaman frambuá, en Berisso uva chinche. No es una vinífera y en varios países ni siquiera puede llamarse vino, y sin embargo escribió buena parte de la historia vitivinícola argentina.",
-    date: "10 de septiembre",
-    image: "/images/uva-isabella.jpg",
-    body: [
-      "Hay uvas que se cultivan para hacer vinos de guarda, etiquetas premiadas y catas solemnes. Y hay otras, como la Isabella, que se cultivan para hacer memoria. En Colonia Caroya la llaman frambuá, en Berisso y la Costa la conocen como uva chinche, en Brasil es la Isabel. Es una cepa que no pertenece a la familia de las uvas \"nobles\" del vino —la Vitis vinifera— y que sin embargo escribió una parte enorme de la historia vitivinícola argentina, especialmente en dos rincones muy distintos entre sí: las sierras cordobesas de Colonia Caroya y los montes ribereños de la Costa del Río de la Plata.",
-      "## Un origen americano, casi accidental",
-      "La Isabella no nació en un laboratorio ni fue diseñada por un enólogo: apareció como un cruce natural entre la Vitis labrusca, una vid silvestre norteamericana, y variedades europeas de Vitis vinifera que los colonos habían llevado al continente. Su primer registro documentado data de 1816, en un vivero de la costa este de Estados Unidos. La leyenda más difundida cuenta que el nombre honra a Isabella Gibbs, la mujer de un vecino que difundió la variedad desde su jardín.",
-      "Lo curioso es que esta uva \"menor\" terminó salvando, en parte, a la vitivinicultura europea clásica. A fines del siglo XIX, la filoxera devastó los viñedos del Viejo Mundo. Las variedades americanas, entre ellas la Vitis labrusca, resultaron naturalmente resistentes a la plaga, y se usaron masivamente como portainjertos para salvar a las vides europeas. En ese contexto, la Isabella viajó a Europa entre 1820 y 1830 y se instaló también, más tarde, en regiones tan distintas como Rusia, la India, la Isla Reunión o Suiza.",
-      "## Características: la uva que se reconoce con los ojos cerrados",
-      "La Isabella es una uva tinta de piel gruesa y pulpa carnosa, muy resistente al frío, a las enfermedades fúngicas y a la propia filoxera, lo que explica su enorme adaptabilidad. Su rasgo más distintivo es aromático: el llamado \"sabor foxy\", una nota intensa a frutilla, frambuesa y cereza que la hace inconfundible frente a cualquier vino hecho con vinifera. Con ella se elaboran vinos livianos, de baja graduación alcohólica (entre 9° y 10°), generalmente dulces o semidulces, pensados para tomar jóvenes y frescos.",
-      "## Una cepa incómoda para la ley",
-      "Un dato que sorprende a quien recién se acerca a esta variedad es que, en varios países, no puede llamarse legalmente \"vino\" a lo que se hace con ella. En Argentina, una resolución del Instituto Nacional de Vitivinicultura de 1992 estableció que solo puede llamarse vino a los productos elaborados con Vitis vinifera, y en 2010 directamente se prohibió el ingreso de uvas no viníferas a establecimientos vitivinícolas. La medida golpeó de lleno a los productores tradicionales de Colonia Caroya y de la Costa, que durante generaciones habían vivido de esta uva. Recién en 2013, tras las gestiones de los propios productores, se logró destrabar parcialmente la situación.",
-      "## Colonia Caroya: la Isabella que llegó en las valijas de los friulanos",
-      "En 1878 desembarcó en Buenos Aires un contingente de familias del Friuli, en el noreste de Italia, que terminaría fundando Colonia Caroya, en las sierras de Córdoba. Entre sus pertenencias trajeron esquejes de vid, entre ellos la Isabella, que en su región de origen se conocía como uva \"fragola\", y con la que allá elaboraban el fragolino.",
-      "En su nueva tierra cordobesa, esa cepa resistente se transformó rápidamente en la base del vino casero: cada familia elaboraba el suyo, y con el correr de las décadas surgió el Frambuá, un tinto dulce, frutado y liviano que hasta hoy funciona como emblema local. El quiebre llegó en los años 60, cuando comenzó un proceso de arranque masivo de viñedos de Isabella para reconvertirlos hacia variedades finas. Desde entonces, solo sobrevivieron algunas plantaciones de peso en Colonia Caroya, sostenidas por bodegas familiares que decidieron no abandonar la cepa que fundó su historia vitivinícola.",
-      "## La Costa: la uva chinche entre Avellaneda, Berisso y Ensenada",
-      "Mientras en Córdoba la Isabella se afincaba en las sierras, en la ribera del Río de la Plata escribía otra historia paralela. Desde fines del siglo XIX, inmigrantes italianos, españoles y portugueses se instalaron en las tierras bajas y los montes costeros que van desde Avellaneda hasta Berisso, y encontraron en la Isabella —bautizada popularmente \"uva chinche\"— la única vid capaz de soportar la humedad constante y las crecidas del río. Bajo el sistema de parral, dio origen al llamado Vino de la Costa: un tinto artesanal, natural, de aroma frutado y graduación baja, elaborado íntegramente en las quintas de los propios productores.",
-      "En Berisso en particular, el vino de la costa se transformó en una seña de identidad tan fuerte como el puerto o los frigoríficos que marcaron la historia de la ciudad. La producción cayó drásticamente durante el siglo XX, reducida al consumo familiar. Pero no se apagó del todo: en 2003 un grupo de bodegueros locales fundó la Cooperativa del Vino de la Costa de Berisso para relanzar la actividad, y hoy la zona vive un pequeño renacimiento, con la Fiesta del Vino de la Costa como vidriera anual.",
-      "## Una cepa, dos historias, un mismo espíritu",
-      "Lo que une a Colonia Caroya con la Costa de Berisso, más allá de los kilómetros y los paisajes tan distintos, es la manera en que la Isabella funcionó como refugio de identidad para comunidades de inmigrantes que necesitaban seguir haciendo, en tierra ajena, lo que sabían hacer en la suya: vino casero, para la mesa familiar y para compartir con los vecinos. Hoy, mientras el mundo del vino argentino mira hacia Malbec y varietales de alta gama, la Isabella sigue ahí, resistiendo con el mismo tesón con el que resistió a la filoxera hace más de un siglo.",
-    ],
-  },
-];
+import Link from "next/link";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
+import SubscribeForm from "@/components/SubscribeForm";
+import { posts } from "@/lib/posts";
+import { STORE_URL, trackedUrl } from "@/lib/site";
 
 export default function Home() {
-  const [selectedPost, setSelectedPost] = useState<(typeof posts)[number] | null>(null);
-
   return (
     <div className="min-h-screen bg-[#F7F1E3]">
-      <nav className="max-w-6xl mx-auto px-6 py-6 flex justify-center gap-8 text-sm text-gray-600">
-        <a href="#" className="hover:text-[#722F37]">Inicio</a>
-        <a href="#sobre-mi" className="hover:text-[#722F37]">Sobre mí</a>
-        <a href="#suscribite" className="hover:text-[#722F37]">Suscribite</a>
-      </nav>
+      <SiteNav />
 
       <main className="max-w-6xl mx-auto px-6 pb-24">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
@@ -492,30 +51,31 @@ export default function Home() {
           <p className="text-gray-700 leading-relaxed flex-1">
             Si vas a comprar vino te recomiendo a mis amigos de <span className="font-semibold text-[#722F37]">rutadebarricas.com</span>, tienen grandes vinos, buenos precios y entrega gratis.
           </p>
-          <a href="https://rutadebarricas.com" target="_blank" rel="noopener noreferrer" className="shrink-0 rounded-full bg-[#722F37] text-white px-6 py-3 font-medium hover:bg-[#5a252c] transition whitespace-nowrap">Ir a rutadebarricas.com</a>
+          <a href={trackedUrl(STORE_URL, "portada", "recomendacion")} target="_blank" rel="noopener noreferrer" className="shrink-0 rounded-full bg-[#722F37] text-white px-6 py-3 font-medium hover:bg-[#5a252c] transition whitespace-nowrap">Ir a rutadebarricas.com</a>
         </section>
 
         <div className="mt-16 grid md:grid-cols-[1fr_260px] gap-10 items-start">
           <section className="grid sm:grid-cols-2 gap-6 text-left">
             {posts.map((post) => (
               <article
-                key={post.title}
-                onClick={() => setSelectedPost(post)}
-                className="bg-white rounded-3xl p-6 border-2 border-orange-400 cursor-pointer transition hover:shadow-lg hover:-translate-y-0.5"
+                key={post.slug}
+                className="relative bg-white rounded-3xl p-6 border-2 border-orange-400 transition hover:shadow-lg hover:-translate-y-0.5"
               >
-                <p className="text-xs text-gray-400 uppercase tracking-wide text-center">{post.date}</p>
-                <h2 className="text-lg font-semibold text-[#722F37] mt-1 text-center">{post.title}</h2>
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-32 h-32 object-contain mx-auto mt-3"
-                />
-                <p className="text-gray-600 mt-2 text-sm text-center">{post.excerpt}</p>
+                <Link href={`/historias/${post.slug}`} className="block">
+                  <p className="text-xs text-gray-400 uppercase tracking-wide text-center">{post.date}</p>
+                  <h2 className="text-lg font-semibold text-[#722F37] mt-1 text-center">{post.title}</h2>
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-32 h-32 object-contain mx-auto mt-3"
+                  />
+                  <p className="text-gray-600 mt-2 text-sm text-center">{post.excerpt}</p>
+                  <p className="mt-3 text-center text-sm font-semibold text-[#722F37]">Leer la historia →</p>
+                </Link>
                 <a
-                  href="https://rutadebarricas.com"
+                  href={trackedUrl(STORE_URL, post.slug, "tarjeta-portada")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
                   className="mt-3 block text-center text-sm font-medium text-orange-500 hover:text-[#722F37]"
                 >
                   Si querés comprar vinos, no te olvides de nuestros amigos de rutadebarricas.com
@@ -530,13 +90,13 @@ export default function Home() {
             </h3>
             <ul className="space-y-3">
               {posts.map((post) => (
-                <li key={post.title} className="border-b border-orange-100 pb-2 last:border-0">
-                  <button
-                    onClick={() => setSelectedPost(post)}
+                <li key={post.slug} className="border-b border-orange-100 pb-2 last:border-0">
+                  <Link
+                    href={`/historias/${post.slug}`}
                     className="text-sm text-gray-700 hover:text-[#722F37] leading-snug block text-left"
                   >
                     {post.title}
-                  </button>
+                  </Link>
                   <span className="text-xs text-gray-400">{post.date}</span>
                 </li>
               ))}
@@ -557,91 +117,10 @@ export default function Home() {
           <p className="mt-3 text-gray-600">
             Todos los días te mando una historia nueva directo al mail. Sin trucos, sin letra chica, sin que en algún momento te empiece a cobrar. Date de baja cuando quieras, con un clic.
           </p>
-          <form
-            action="https://buttondown.com/api/emails/embed-subscribe/sebaskrill"
-            method="post"
-            target="popupwindow"
-            onSubmit={() => {
-              window.open("https://buttondown.com/sebaskrill", "popupwindow");
-            }}
-            className="mt-6 flex flex-col sm:flex-row gap-3 justify-center"
-          >
-            <input
-              type="email"
-              name="email"
-              placeholder="tu@email.com"
-              required
-              className="rounded-full border border-orange-300 px-5 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 flex-1"
-            />
-            <input type="hidden" value="1" name="embed" />
-            <button
-              type="submit"
-              className="rounded-full bg-[#722F37] text-white px-6 py-3 font-medium hover:bg-[#5a252c] transition"
-            >
-              Quiero unirme, gratis
-            </button>
-          </form>
+          <SubscribeForm />
         </section>
 
-        <footer className="mt-16 pt-8 border-t border-orange-200 max-w-2xl mx-auto text-center space-y-3">
-          <p className="text-sm font-semibold text-[#722F37] uppercase tracking-wide">
-            Beber con moderación. Prohibida su venta a menores de 18 años.
-          </p>
-          <p className="text-xs text-gray-500 leading-relaxed">
-            Privacidad: el mail que dejás en la membresía se usa solo para enviarte las historias de No soy Sommelier, a través de Buttondown. No lo compartimos con nadie y podés darte de baja cuando quieras desde cualquier mail que recibas.
-          </p>
-          <p className="text-xs text-gray-400">© 2026 No soy Sommelier</p>
-        </footer>
-
-        {selectedPost && (
-          <div
-            className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
-            onClick={() => setSelectedPost(null)}
-          >
-            <div
-              className="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-8 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setSelectedPost(null)}
-                aria-label="Cerrar"
-                className="absolute top-4 right-4 text-gray-400 hover:text-[#722F37] text-2xl leading-none"
-              >
-                ×
-              </button>
-              <p className="text-xs text-gray-400 uppercase tracking-wide">{selectedPost.date}</p>
-              <h2 className="text-2xl font-bold text-[#722F37] mt-1 pr-8">{selectedPost.title}</h2>
-              <img
-                src={selectedPost.image}
-                alt={selectedPost.title}
-                className="w-full max-h-64 object-cover rounded-2xl mt-4"
-              />
-              <div className="mt-6 text-gray-700 leading-relaxed space-y-4">
-                {selectedPost.body ? (
-                  selectedPost.body.map((block, i) =>
-                    block.startsWith("## ") ? (
-                      <h3 key={i} className="text-lg font-semibold text-[#722F37] mt-6">
-                        {block.replace("## ", "")}
-                      </h3>
-                    ) : (
-                      <p key={i}>{block}</p>
-                    )
-                  )
-                ) : (
-                  <p>{selectedPost.excerpt}</p>
-                )}
-              </div>
-              <a
-                href="https://rutadebarricas.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-block text-center text-sm font-medium text-orange-500 hover:text-[#722F37]"
-              >
-                Si querés comprar vinos, no te olvides de nuestros amigos de rutadebarricas.com
-              </a>
-            </div>
-          </div>
-        )}
+        <SiteFooter />
       </main>
     </div>
   );
