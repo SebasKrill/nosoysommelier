@@ -5,16 +5,18 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import SubscribeForm from "@/components/SubscribeForm";
 import WineCard from "@/components/WineCard";
+import JsonLd from "@/components/JsonLd";
 import {
   posts,
   getPost,
   readingMinutes,
   seriesNeighbors,
   dateNeighbors,
+  isoDate,
   type Post,
 } from "@/lib/posts";
 import { wines } from "@/lib/wines";
-import { SITE_URL, STORE_URL, trackedUrl } from "@/lib/site";
+import { SITE_URL, SITE_NAME, AUTHOR, STORE_URL, trackedUrl } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -85,6 +87,21 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
 
   return (
     <div className="min-h-screen bg-[#F7F1E3]">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          image: `${SITE_URL}${post.image}`,
+          datePublished: isoDate(post),
+          inLanguage: "es-AR",
+          author: AUTHOR,
+          publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+          mainEntityOfPage: pageUrl,
+          ...(post.series && { isPartOf: { "@type": "CreativeWorkSeries", name: post.series.name } }),
+        }}
+      />
       <SiteNav />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 pb-24">

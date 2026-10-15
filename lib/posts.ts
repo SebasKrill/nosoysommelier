@@ -475,6 +475,17 @@ export const posts: Post[] = [
   },
 ];
 
+const MONTHS: Record<string, string> = {
+  enero: "01", febrero: "02", marzo: "03", abril: "04", mayo: "05", junio: "06",
+  julio: "07", agosto: "08", septiembre: "09", octubre: "10", noviembre: "11", diciembre: "12",
+};
+
+// Convierte "21 de septiembre" en "2026-09-21" para los buscadores.
+export function isoDate(post: Post, year = 2026) {
+  const [day, , month] = post.date.split(" ");
+  return `${year}-${MONTHS[month]}-${day.padStart(2, "0")}`;
+}
+
 export function getPost(slug: string) {
   return posts.find((p) => p.slug === slug);
 }
