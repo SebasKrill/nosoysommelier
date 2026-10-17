@@ -3,11 +3,11 @@
 export default function SubscribeForm() {
   return (
     <form
-      action="https://buttondown.com/api/emails/embed-subscribe/sebaskrill"
+      action="https://buttondown.com/api/emails/embed-subscribe/nosoysommelier"
       method="post"
       target="popupwindow"
       onSubmit={() => {
-        window.open("https://buttondown.com/sebaskrill", "popupwindow");
+        window.open("https://buttondown.com/nosoysommelier", "popupwindow");
       }}
       className="mt-6 flex flex-col sm:flex-row gap-3 justify-center"
     >
