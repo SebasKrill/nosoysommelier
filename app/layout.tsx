@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "No soy Sommelier",
   description: "Historias del vino y vinos con historias",
+  alternates: {
+    types: { "application/rss+xml": `${SITE_URL}/rss.xml` },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
