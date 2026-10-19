@@ -4,7 +4,8 @@ import SiteFooter from "@/components/SiteFooter";
 import SubscribeForm from "@/components/SubscribeForm";
 import { posts } from "@/lib/posts";
 import JsonLd from "@/components/JsonLd";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR, STORE_URL, trackedUrl } from "@/lib/site";
+import { goPath } from "@/lib/go";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR } from "@/lib/site";
 
 export default function Home() {
   return (
@@ -74,7 +75,7 @@ export default function Home() {
           <p className="text-gray-700 leading-relaxed flex-1">
             Si vas a comprar vino te recomiendo a mis amigos de <span className="font-semibold text-[#722F37]">rutadebarricas.com</span>, tienen grandes vinos, buenos precios y entrega gratis.
           </p>
-          <a href={trackedUrl(STORE_URL, "portada", "recomendacion")} target="_blank" rel="noopener noreferrer" className="shrink-0 rounded-full bg-[#722F37] text-white px-6 py-3 font-medium hover:bg-[#5a252c] transition whitespace-nowrap">Ir a rutadebarricas.com</a>
+          <a href={goPath("portada", "recomendacion")} target="_blank" rel="noopener noreferrer" className="shrink-0 rounded-full bg-[#722F37] text-white px-6 py-3 font-medium hover:bg-[#5a252c] transition whitespace-nowrap">Ir a rutadebarricas.com</a>
         </section>
 
         <div className="mt-16 grid md:grid-cols-[1fr_260px] gap-10 items-start">
@@ -96,7 +97,7 @@ export default function Home() {
                   <p className="mt-3 text-center text-sm font-semibold text-[#722F37]">Leer la historia →</p>
                 </Link>
                 <a
-                  href={trackedUrl(STORE_URL, post.slug, "tarjeta-portada")}
+                  href={goPath(post.slug, "tarjeta-portada")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-3 block text-center text-sm font-medium text-orange-500 hover:text-[#722F37]"

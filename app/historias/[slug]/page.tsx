@@ -6,6 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import SubscribeForm from "@/components/SubscribeForm";
 import WineCard from "@/components/WineCard";
 import JsonLd from "@/components/JsonLd";
+import { goPath } from "@/lib/go";
 import {
   posts,
   getPost,
@@ -16,7 +17,7 @@ import {
   type Post,
 } from "@/lib/posts";
 import { wines } from "@/lib/wines";
-import { SITE_URL, SITE_NAME, AUTHOR, STORE_URL, trackedUrl } from "@/lib/site";
+import { SITE_URL, SITE_NAME, AUTHOR } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -147,7 +148,7 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
                     wine={wine}
                     size="compact"
                     label="Si te gusta esta historia, probá"
-                    href={trackedUrl(wine.url, post.slug, "mitad")}
+                    href={goPath(post.slug, "mitad")}
                   />
                 )}
                 {block.startsWith("## ") ? (
@@ -165,7 +166,7 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
             <WineCard
               wine={wine}
               label="El vino para acompañar esta historia"
-              href={trackedUrl(wine.url, post.slug, "final")}
+              href={goPath(post.slug, "final")}
             />
           ) : (
             <aside className="my-10 bg-[#F7F1E3] rounded-2xl border border-orange-300 p-6 text-center">
@@ -174,7 +175,7 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
                 <span className="font-semibold text-[#722F37]">rutadebarricas.com</span>
               </p>
               <a
-                href={trackedUrl(STORE_URL, post.slug, "final")}
+                href={goPath(post.slug, "final")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-block rounded-full bg-[#722F37] text-white px-6 py-3 font-medium hover:bg-[#5a252c] transition"
