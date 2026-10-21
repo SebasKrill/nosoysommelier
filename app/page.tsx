@@ -64,7 +64,7 @@ export default function Home() {
             Soy Mara Dern. No soy sommelier, no tengo el diploma, no hice el curso. Lo que tengo es una obsesión reciente con el vino y la costumbre de escribir todo lo que voy aprendiendo, un posteo por vez.
           </p>
           <p className="mt-6 text-gray-700 leading-relaxed">
-            Mi compañero es Sebastián Krill, un viajero impenitente que se pasó la vida moviéndose entre viñedos del mundo y que, a diferencia mía, sabe exactamente de qué habla. Él pone el conocimiento; yo pongo las preguntas que vos también te harías. Entre los dos hacemos este blog, que no se toma en serio a sí mismo. Pero al vino sí.
+            Mi compañero de viaje es Sebastián Krill, un viajero impenitente que se pasó la vida moviéndose entre viñedos del mundo y que, a diferencia mía, sabe exactamente de qué habla. Él pone el conocimiento; yo pongo las preguntas que vos también te harías. Entre los dos hacemos este blog, que no se toma en serio a sí mismo. Pero al vino sí.
           </p>
           <p className="mt-4 text-gray-700 leading-relaxed">
             Si buscás tecnicismos, este no es tu lugar. Si querés entender el vino como te lo explicarían dos amigos que no siempre están de acuerdo, quedate.
