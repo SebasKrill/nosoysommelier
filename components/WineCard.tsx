@@ -26,8 +26,12 @@ export default function WineCard({ wine, href, label, size = "full" }: Props) {
           {wine.name}
         </p>
         <p className="text-xs text-gray-500 mt-1">{wine.origin}</p>
-        {wine.price && (
-          <p className={`${compact ? "text-sm" : "text-lg"} font-semibold text-gray-800 mt-1`}>{wine.price}</p>
+        {wine.inStock === false ? (
+          <p className={`${compact ? "text-sm" : "text-base"} font-semibold text-gray-500 mt-1`}>Sin stock por ahora</p>
+        ) : (
+          wine.price && (
+            <p className={`${compact ? "text-sm" : "text-lg"} font-semibold text-gray-800 mt-1`}>{wine.price}</p>
+          )
         )}
         {!compact && <p className="text-gray-700 mt-2 text-base">{wine.blurb}</p>}
         <a

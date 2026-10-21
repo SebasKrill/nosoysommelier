@@ -1,7 +1,7 @@
 // Feed RSS con las historias completas. Sirve para lectores de RSS y para que
 // Buttondown mande cada historia nueva por mail (función "RSS-to-email").
 import { posts, isoDate, type Post } from "@/lib/posts";
-import { wines, type Wine } from "@/lib/wines";
+import { liveWine } from "@/lib/store";
 import {
   SITE_URL,
   SITE_NAME,
@@ -11,6 +11,8 @@ import {
 } from "@/lib/site";
 
 export const dynamic = "force-static";
+// Se regenera cada hora para que el precio del vino siga a la tienda.
+export const revalidate = 3600;
 
 function escapeXml(text: string) {
   return text
@@ -21,9 +23,9 @@ function escapeXml(text: string) {
 }
 
 // La historia completa en HTML, como la va a leer el suscriptor en el mail.
-function postHtml(post: Post) {
+async function postHtml(post: Post) {
   const url = `${SITE_URL}/historias/${post.slug}`;
-  const wine: Wine | undefined = post.wine ? wines[post.wine] : undefined;
+  const wine = await liveWine(post.wine);
   const image = post.image.startsWith("http") ? post.image : `${SITE_URL}${post.image}`;
 
   const body = post.body
@@ -37,7 +39,7 @@ function postHtml(post: Post) {
   const recommendation = wine
     ? `<p><strong>El vino para acompañar esta historia:</strong> ` +
       `<a href="${escapeXml(trackedUrl(wine.url, post.slug, "mail"))}">${escapeXml(wine.name)}</a>` +
-      ` (${escapeXml(wine.origin)})${wine.price ? ` · ${escapeXml(wine.price)}` : ""}</p>`
+      ` (${escapeXml(wine.origin)})${wine.inStock === false ? " · sin stock por ahora" : wine.price ? ` · ${escapeXml(wine.price)}` : ""}</p>`
     : `<p>Si querés comprar vinos, no te olvides de nuestros amigos de ` +
       `<a href="${escapeXml(trackedUrl(STORE_URL, post.slug, "mail"))}">rutadebarricas.com</a>.</p>`;
 
@@ -53,9 +55,10 @@ function postHtml(post: Post) {
   ].join("\n");
 }
 
-export function GET() {
+export async function GET() {
+  const htmls = await Promise.all(posts.map((post) => postHtml(post)));
   const items = posts
-    .map((post) => {
+    .map((post, i) => {
       const url = `${SITE_URL}/historias/${post.slug}`;
       const pubDate = new Date(`${isoDate(post)}T09:00:00-03:00`).toUTCString();
       return `    <item>
@@ -65,7 +68,7 @@ export function GET() {
       <pubDate>${pubDate}</pubDate>
       <dc:creator>Mara Dern</dc:creator>
       <description>${escapeXml(post.excerpt)}</description>
-      <content:encoded><![CDATA[${postHtml(post).replace(/]]>/g, "]]]]><![CDATA[>")}]]></content:encoded>
+      <content:encoded><![CDATA[${htmls[i].replace(/]]>/g, "]]]]><![CDATA[>")}]]></content:encoded>
     </item>`;
     })
     .join("\n");

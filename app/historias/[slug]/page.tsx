@@ -16,10 +16,13 @@ import {
   isoDate,
   type Post,
 } from "@/lib/posts";
-import { wines } from "@/lib/wines";
+import { liveWine } from "@/lib/store";
 import { SITE_URL, SITE_NAME, AUTHOR } from "@/lib/site";
 
 export const dynamicParams = false;
+
+// Se regenera cada hora para que el precio y el stock del vino sigan a la tienda.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -77,7 +80,7 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
   const post = getPost(slug);
   if (!post) notFound();
 
-  const wine = post.wine ? wines[post.wine] : undefined;
+  const wine = await liveWine(post.wine);
   const mid = midpoint(post.body);
   const minutes = readingMinutes(post);
   const pageUrl = `${SITE_URL}/historias/${post.slug}`;
