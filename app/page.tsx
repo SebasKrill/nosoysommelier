@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -83,9 +84,9 @@ export default function Home() {
 
         <div className="mt-16 grid md:grid-cols-[1fr_260px] gap-10 items-start">
           <section className="grid sm:grid-cols-2 gap-6 text-left">
-            {posts.map((post) => (
+            {posts.map((post, i) => (
+              <Fragment key={post.slug}>
               <article
-                key={post.slug}
                 className="relative bg-white rounded-3xl p-6 border-2 border-orange-400 transition hover:shadow-lg hover:-translate-y-0.5"
               >
                 <Link href={`/historias/${post.slug}`} className="block">
@@ -108,6 +109,22 @@ export default function Home() {
                   Si querés comprar vinos, no te olvides de nuestros amigos de rutadebarricas.com
                 </a>
               </article>
+              {/* Caja de suscripción entre la tercera y la cuarta historia */}
+              {i === 2 && posts.length > 3 && (
+                <aside className="sm:col-span-2 bg-[#F7F1E3] rounded-3xl border-2 border-orange-400 p-8 text-center">
+                  <p className="text-xs font-semibold text-orange-500 uppercase tracking-widest">
+                    Membresía No soy Sommelier
+                  </p>
+                  <p className="mt-2 text-2xl sm:text-3xl font-bold text-[#722F37]">
+                    ¿Te gustan estas historias? Recibilas en tu mail.
+                  </p>
+                  <p className="mt-3 text-gray-600">
+                    Una historia nueva por día. Es gratis y te das de baja con un clic.
+                  </p>
+                  <SubscribeForm />
+                </aside>
+              )}
+              </Fragment>
             ))}
           </section>
 
