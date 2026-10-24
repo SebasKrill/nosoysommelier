@@ -24,6 +24,9 @@ export const posts: Post[] = [
     wine: "palo-a-pique-tannat-marselan",
     series: { name: "Entre Ríos en siete preguntas", part: 5, total: 7 },
     excerpt: "El Malbec es el vino que todos conocen; el Marselan, la uva que casi nadie sabe pronunciar. Mara y Sebas los comparan con honestidad: de dónde vienen, a qué saben y para quién es cada uno.",
+    seoTitle: "Diferencias entre Marselan y Malbec",
+    seoDescription: "Marselan o Malbec: de dónde viene cada uno, a qué sabe y cuál te va a gustar más. Una comparación honesta, sin tecnicismos.",
+    keywords: ["marselan o malbec", "diferencias marselan malbec"],
     date: "24 de octubre",
     image: "/images/uvas-4.png",
     body: [
@@ -61,6 +64,9 @@ export const posts: Post[] = [
     wine: "gran-tinto-del-palmar",
     series: { name: "Entre Ríos en siete preguntas", part: 4, total: 7 },
     excerpt: "Mismo viñedo, mismas uvas, distinto camino: uno joven y otro con doce meses de barrica. Mara y Sebas los prueban lado a lado y dicen, sin vender humo, cuál conviene en cada caso.",
+    seoTitle: "Palo a Pique o Gran Tinto del Palmar",
+    seoDescription: "Mismo viñedo de Entre Ríos, dos vinos: uno joven y otro con doce meses de barrica. Cuál conviene en cada caso, dicho sin vender humo.",
+    keywords: ["palo a pique", "gran tinto del palmar", "vinos de entre ríos"],
     date: "23 de octubre",
     image: "/images/servir-2.png",
     body: [
@@ -97,6 +103,9 @@ export const posts: Post[] = [
     wine: "palo-a-pique-ampv",
     series: { name: "Entre Ríos en siete preguntas", part: 3, total: 7 },
     excerpt: "Una reseña del Palo a Pique cofermentado, un vino que venden nuestros amigos, y por eso obligada a decir también lo que no tiene. Para quién es, para quién no, y cuánto cuesta.",
+    seoTitle: "Reseña de Palo a Pique, vino de Entre Ríos",
+    seoDescription: "Reseña honesta del Palo a Pique, el cofermentado de Marselan, Ancellotta y Petit Verdot: lo que tiene, lo que no, para quién es y cuánto cuesta.",
+    keywords: ["palo a pique reseña", "marselan ancellotta petit verdot", "vino de entre ríos"],
     date: "22 de octubre",
     image: "/images/mujer-tinto-3.png",
     body: [
@@ -136,6 +145,9 @@ export const posts: Post[] = [
     wine: "palo-a-pique-cabernet-franc",
     series: { name: "Entre Ríos en siete preguntas", part: 2, total: 7 },
     excerpt: "Mara hace la pregunta que todos piensan y pocos dicen en voz alta: cuánto sale un buen vino de bodega chica y por qué no cuesta lo mismo que el del súper. Sebas responde con números y sin vueltas.",
+    seoTitle: "¿Cuánto cuesta un vino de bodega chica?",
+    seoDescription: "Cuánto sale un buen vino de bodega chica y por qué cuesta más que uno de supermercado. La respuesta, con números y sin vueltas.",
+    keywords: ["precio vino bodega chica", "vino de supermercado vs bodega"],
     date: "21 de octubre",
     image: "/images/servir-1.png",
     body: [
@@ -173,6 +185,9 @@ export const posts: Post[] = [
     wine: "palo-a-pique-ampv",
     series: { name: "Entre Ríos en siete preguntas", part: 1, total: 7 },
     excerpt: "Entre Ríos llegó a ser la cuarta provincia del vino y una ley la dejó sin viñedos durante sesenta años. Mara y Sebas cruzan el río para entender por qué casi nadie conoce sus vinos, y si vale la pena conocerlos.",
+    seoTitle: "Vinos de Entre Ríos: su historia olvidada",
+    seoDescription: "Entre Ríos fue la cuarta provincia del vino hasta que una ley la dejó sin viñedos. Por qué casi nadie conoce sus vinos y si vale la pena probarlos.",
+    keywords: ["vinos de entre ríos", "historia del vino en entre ríos"],
     date: "20 de octubre",
     image: "/images/uvas-3.png",
     body: [
@@ -203,6 +218,9 @@ export const posts: Post[] = [
     title: "¿Qué es un vino de cosecha tardía y por qué no empalaga?",
     slug: "jurancon-cosecha-tardia",
     excerpt: "En Pau, frente a los Pirineos, Mara prueba un Jurançon: un blanco dulce hecho con uvas que se secan en la planta hasta diciembre. Qué es una cosecha tardía, por qué un buen dulce no empalaga y con qué se toma.",
+    seoTitle: "Qué es un vino de cosecha tardía",
+    seoDescription: "Qué es un vino de cosecha tardía, por qué un buen dulce no empalaga y con qué se toma, contado desde Jurançon, al pie de los Pirineos.",
+    keywords: ["vino de cosecha tardía", "qué es cosecha tardía", "jurançon"],
     date: "19 de octubre",
     image: "/images/mujer-blanco-1.png",
     body: [
@@ -613,6 +631,9 @@ export const posts: Post[] = [
     slug: "torrontes-cachi-adentro",
     wine: "adentro-torrontes",
     excerpt: "La historia de un ingeniero suizo que se fue a las montañas de Salta a desenchufarse del mundo y terminó haciendo, a 2.700 metros, uno de los torrontés más singulares del país.",
+    seoTitle: "Torrontés de Cachi Adentro, vino de altura",
+    seoDescription: "Un torrontés de Cachi Adentro hecho a 2.700 metros en Salta: la historia del vino, de quién lo hace y por qué huele a altura extrema.",
+    keywords: ["torrontés de altura", "torrontés cachi", "vinos de salta"],
     date: "16 de septiembre",
     image: "/images/torrontes-cachi.jpg",
     body: [
@@ -654,6 +675,9 @@ export const posts: Post[] = [
     slug: "palo-a-pique-entre-rios",
     wine: "palo-a-pique-ampv",
     excerpt: "La historia de una bodega familiar en Colón que resucitó una tradición vitivinícola perdida hace noventa años y encontró, en un blend co-fermentado de tres cepas, la identidad que le faltaba al litoral.",
+    seoTitle: "Palo a Pique: el vino de Colón, Entre Ríos",
+    seoDescription: "La bodega familiar de Colón que revivió el vino entrerriano y encontró su identidad en Palo a Pique, un blend cofermentado de tres cepas.",
+    keywords: ["palo a pique", "bodega en colón entre ríos", "vino entrerriano"],
     date: "15 de septiembre",
     image: "/images/palo-a-pique.jpg",
     body: [
@@ -689,6 +713,9 @@ export const posts: Post[] = [
     slug: "marselan",
     wine: "palo-a-pique-tannat-marselan",
     excerpt: "Nació en un laboratorio francés en 1961, fue archivada treinta años por \"fracasada\" y hoy asoma desde los cerros de Salta hasta las costas de Entre Ríos. La historia de una cepa de diseño que encontró su lugar.",
+    seoTitle: "Marselan: la cepa francesa en Argentina",
+    seoDescription: "Qué es el Marselan, la cepa nacida en Francia en 1961 que hoy se cultiva de Salta a Entre Ríos. Su historia y a qué sabe.",
+    keywords: ["marselan", "cepa marselan", "marselan argentina"],
     date: "14 de septiembre",
     image: "/images/marselan.jpg",
     body: [
@@ -718,6 +745,9 @@ export const posts: Post[] = [
     title: "Primitivo y Zinfandel: la historia de una misma uva con dos apellidos",
     slug: "primitivo-y-zinfandel",
     excerpt: "Durante un siglo, productores de Italia y California creyeron tener dos uvas distintas. La ciencia demostró que eran la misma. Un recorrido por el enredo genético que une Puglia, California y Croacia.",
+    seoTitle: "Primitivo y Zinfandel: ¿la misma uva?",
+    seoDescription: "Primitivo y Zinfandel son la misma uva con dos nombres. Cómo lo descubrió la ciencia y qué une a Puglia, California y Croacia.",
+    keywords: ["primitivo y zinfandel", "primitivo zinfandel misma uva"],
     date: "13 de septiembre",
     image: "/images/primitivo-zinfandel.jpg",
     body: [
@@ -748,6 +778,9 @@ export const posts: Post[] = [
     title: "Tres mundos, una uva: la historia del Sauvignon Blanc en Nueva Zelanda, Chile y el Loira",
     slug: "sauvignon-blanc-tres-mundos",
     excerpt: "Mineral y contenido en el Loira, explosivo en Marlborough, a mitad de camino en Chile. Tres formas radicalmente distintas de interpretar la misma cepa blanca.",
+    seoTitle: "Sauvignon Blanc: Loira, Nueva Zelanda y Chile",
+    seoDescription: "El Sauvignon Blanc en tres estilos: mineral en el Loira, explosivo en Marlborough y a mitad de camino en Chile. En qué se diferencian.",
+    keywords: ["sauvignon blanc", "sauvignon blanc nueva zelanda", "sauvignon blanc chile"],
     date: "12 de septiembre",
     image: "/images/sauvignon-blanc.jpg",
     body: [
@@ -775,6 +808,9 @@ export const posts: Post[] = [
     slug: "tannat-cuatro-terrunos",
     wine: "palo-a-pique-tannat",
     excerpt: "Nació en los Pirineos, cruzó el Atlántico con inmigrantes vascos y hoy se interpreta de cuatro maneras distintas en Sudamérica. Un recorrido por la cepa que se volvió bandera en más de un país.",
+    seoTitle: "Tannat en Sudamérica: cuatro terruños",
+    seoDescription: "El Tannat en Uruguay, los Valles Calchaquíes, Bolivia y Entre Ríos: cómo cambia la cepa de los Pirineos en cada terruño de Sudamérica.",
+    keywords: ["tannat", "tannat uruguay", "tannat entre ríos"],
     date: "11 de septiembre",
     image: "/images/tannat.jpg",
     body: [
@@ -802,6 +838,9 @@ export const posts: Post[] = [
     title: "Uva Isabella: la cepa \"prohibida\" que se convirtió en tradición",
     slug: "uva-isabella",
     excerpt: "En Colonia Caroya la llaman frambuá, en Berisso uva chinche. No es una vinífera y en varios países ni siquiera puede llamarse vino, y sin embargo escribió buena parte de la historia vitivinícola argentina.",
+    seoTitle: "Uva Isabella o uva chinche: su historia",
+    seoDescription: "La uva Isabella, chinche o frambuá: por qué en algunos países no puede llamarse vino y cómo marcó la historia del vino argentino.",
+    keywords: ["uva isabella", "uva chinche", "vino de la costa berisso"],
     date: "10 de septiembre",
     image: "/images/uva-isabella.jpg",
     body: [
