@@ -9,6 +9,12 @@ export type Post = {
   date: string;
   image: string;
   body: string[];
+  // Opcionales para buscadores. Si no se completan, se usan título,
+  // resumen y título de la historia.
+  seoTitle?: string; // título para Google, idealmente menos de 60 caracteres, con la palabra clave
+  seoDescription?: string; // descripción para Google, menos de 155 caracteres
+  imageAlt?: string; // descripción de la imagen principal (ayuda en Google Imágenes)
+  keywords?: string[]; // palabras clave objetivo de la historia
 };
 
 export const posts: Post[] = [

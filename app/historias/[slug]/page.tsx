@@ -17,7 +17,7 @@ import {
   type Post,
 } from "@/lib/posts";
 import { liveWine } from "@/lib/store";
-import { SITE_URL, SITE_NAME, AUTHOR } from "@/lib/site";
+import { SITE_URL, SITE_NAME, AUTHOR, ORGANIZATION_ID, absoluteUrl } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -34,18 +34,30 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
+  const title = post.seoTitle ?? post.title;
+  const description = post.seoDescription ?? post.excerpt;
+  const image = { url: absoluteUrl(post.image), alt: post.imageAlt ?? post.title };
   return {
-    title: `${post.title} | No soy Sommelier`,
-    description: post.excerpt,
+    title,
+    description,
+    ...(post.keywords && { keywords: post.keywords }),
     alternates: { canonical: `/historias/${post.slug}` },
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       url: `/historias/${post.slug}`,
       type: "article",
       locale: "es_AR",
-      siteName: "No soy Sommelier",
-      images: [post.image],
+      siteName: SITE_NAME,
+      publishedTime: isoDate(post),
+      ...(post.series && { section: post.series.name }),
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image.url],
     },
   };
 }
@@ -96,12 +108,14 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
           "@context": "https://schema.org",
           "@type": "BlogPosting",
           headline: post.title,
-          description: post.excerpt,
-          image: `${SITE_URL}${post.image}`,
+          description: post.seoDescription ?? post.excerpt,
+          image: absoluteUrl(post.image),
           datePublished: isoDate(post),
+          dateModified: isoDate(post),
           inLanguage: "es-AR",
           author: AUTHOR,
-          publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+          publisher: { "@id": ORGANIZATION_ID },
+          ...(post.keywords && { keywords: post.keywords.join(", ") }),
           mainEntityOfPage: pageUrl,
           ...(post.series && { isPartOf: { "@type": "CreativeWorkSeries", name: post.series.name } }),
         }}
@@ -139,7 +153,7 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
 
           <img
             src={post.image}
-            alt={post.title}
+            alt={post.imageAlt ?? post.title}
             className="w-full max-h-56 sm:max-h-80 object-cover rounded-2xl mt-6"
           />
 
