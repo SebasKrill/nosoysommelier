@@ -3,7 +3,28 @@ export const SITE_URL = "https://nosoysommelier.com.ar";
 
 export const SITE_NAME = "No soy Sommelier";
 export const SITE_DESCRIPTION = "Historias del vino y vinos con historias";
-export const AUTHOR = { "@type": "Person", name: "Mara Dern" };
+// Redes del blog: Google las usa para unir el sitio con sus perfiles.
+export const SOCIAL_PROFILES = [
+  "https://www.instagram.com/nosoysommellier/",
+  "https://www.facebook.com/profile.php?id=61595318170843",
+];
+
+// En los datos estructurados el autor y el editor es la marca del blog.
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+export const ORGANIZATION = {
+  "@type": "Organization",
+  "@id": ORGANIZATION_ID,
+  name: SITE_NAME,
+  url: SITE_URL,
+  description: SITE_DESCRIPTION,
+  sameAs: SOCIAL_PROFILES,
+};
+export const AUTHOR = { "@id": ORGANIZATION_ID };
+
+// Pasa una ruta de imagen ("/images/x.png") a dirección completa.
+export function absoluteUrl(path: string) {
+  return path.startsWith("http") ? path : `${SITE_URL}${path}`;
+}
 
 export const STORE_URL = "https://rutadebarricas.com";
 

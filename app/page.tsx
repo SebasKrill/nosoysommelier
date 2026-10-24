@@ -5,15 +5,17 @@ import SubscribeForm from "@/components/SubscribeForm";
 import { posts } from "@/lib/posts";
 import JsonLd from "@/components/JsonLd";
 import { goPath } from "@/lib/go";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR } from "@/lib/site";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, AUTHOR, ORGANIZATION, ORGANIZATION_ID } from "@/lib/site";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F7F1E3]">
+      <JsonLd data={{ "@context": "https://schema.org", ...ORGANIZATION }} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "WebSite",
+          publisher: { "@id": ORGANIZATION_ID },
           name: SITE_NAME,
           alternateName: ["NoSoySommelier", "No soy sommelier blog"],
           url: SITE_URL,
@@ -30,6 +32,7 @@ export default function Home() {
           description: SITE_DESCRIPTION,
           inLanguage: "es-AR",
           author: AUTHOR,
+          publisher: { "@id": ORGANIZATION_ID },
         }}
       />
       <SiteNav />
