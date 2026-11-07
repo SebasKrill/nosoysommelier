@@ -18,6 +18,17 @@ export type Wine = {
 };
 
 export const wines = {
+  "piedra-negra-pinot-gris": {
+    name: "Lurton Piedra Negra Pinot Gris",
+    origin: "Piedra Negra · Los Chacayes, Valle de Uco, Mendoza",
+    blurb:
+      "La uva gris hija del Pinot Noir, fresca y con un poco más de cuerpo que un Pinot Grigio.",
+    image:
+      "https://rutadebarricas.com/wp-content/uploads/2026/09/lurton-piedra-negra-pinot-gris-reserva.webp",
+    url: "https://rutadebarricas.com/producto/lurton-piedra-negra-pinot-gris/",
+    productId: 2988,
+    price: "$19.000",
+  },
   "gran-tinto-del-palmar": {
     name: "Gran Tinto del Palmar 2024",
     origin: "Altos del Palmar · Colón, Entre Ríos",
