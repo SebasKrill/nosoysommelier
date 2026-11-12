@@ -23,7 +23,7 @@ export const posts: Post[] = [
     slug: "que-es-el-tocai-friulano",
     excerpt: "Debajo de «Entrevero», Sebas escribió «Tocai». Mara piensa en Hungría y en vinos dulces, pero en la copa hay un blanco seco del norte de Italia que tuvo que cambiar de nombre y que en Argentina pasó años confundido con otras uvas.",
     date: "12 de noviembre",
-    image: "/images/mujer-blanco-1.png",
+    image: "/images/mujer-blanco-2.png",
     seoTitle: "¿Qué es el Tocai Friulano? Qué uva es y cómo es el vino",
     seoDescription: "Qué es el Tocai Friulano, por qué ahora se llama Friulano, qué tiene que ver con el Tokaji húngaro y el Sauvignon Blanc, y cómo es en Argentina.",
     imageAlt: "Acuarela de una mujer con una copa de vino blanco",
