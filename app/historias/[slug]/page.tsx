@@ -75,6 +75,16 @@ function midpoint(body: string[]) {
   );
 }
 
+// La caja chica de suscripción al final del texto se muestra en las historias
+// publicadas después de esta (pedido del 16/11: "empezando con la de mañana").
+const INLINE_SUBSCRIBE_AFTER = "que-es-el-tempranillo";
+
+function showInlineSubscribe(post: Post) {
+  const cutoff = posts.findIndex((p) => p.slug === INLINE_SUBSCRIBE_AFTER);
+  const index = posts.findIndex((p) => p.slug === post.slug);
+  return cutoff !== -1 && index !== -1 && index < cutoff;
+}
+
 function NavCard({ post, label }: { post: Post; label: string }) {
   return (
     <Link
@@ -178,6 +188,16 @@ export default async function HistoriaPage({ params }: PageProps<"/historias/[sl
               </div>
             ))}
           </div>
+
+          {showInlineSubscribe(post) && (
+            <aside className="mt-10 bg-[#F7F1E3] rounded-2xl border border-orange-300 p-6 text-center">
+              <p className="text-lg font-semibold text-[#722F37]">
+                ¿Querés la próxima historia en tu mail?
+              </p>
+              <p className="mt-1 text-sm text-gray-600">Una por día. Es gratis.</p>
+              <SubscribeForm />
+            </aside>
+          )}
 
           {wine ? (
             <WineCard
